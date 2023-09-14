@@ -6,10 +6,11 @@ jobs:
     name: Create Artifact
     runs-on: ubuntu-latest
     steps:
-      - name: Create File
+      - name: Create file
         run: touch sampleFile.txt
         if: >-
           !(github.event.pull_request)
+      - name: Share file
         uses: actions/upload-artifact@v3
         with:
           name: authfiles
