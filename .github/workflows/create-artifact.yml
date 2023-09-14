@@ -1,6 +1,8 @@
 # Action to create artifact
 name: create-artifact
-on: [push]
+on:
+  workflow-dispatch:
+
 jobs:
   create-arifact:
     name: Create Artifact
@@ -15,4 +17,6 @@ jobs:
         with:
           name: authfiles
           path: ./sampleFile.txt
+      - name: run download-artifact.yml
+        uses: ./.github/workflows/download-artifact.yml
       
