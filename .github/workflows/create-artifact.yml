@@ -1,3 +1,4 @@
+# Action to create artifact
 name: create-artifact
 on:
   pull_request:
