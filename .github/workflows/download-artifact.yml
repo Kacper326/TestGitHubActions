@@ -1,6 +1,6 @@
 name: download-artifact
 on: 
-  workflow-call:
+  workflow_call:
 jobs:
   echo-smth:
     runs-on: ubuntu-latest
