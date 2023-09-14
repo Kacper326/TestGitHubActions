@@ -4,6 +4,10 @@ on: [push]
 jobs:
   create-arifact:
     name: Create Artifact
+    runs-on:
+      - self-hosted
+      - road-runner
+      - small
     container: 
       image: alpine:3.18.3
     steps:
