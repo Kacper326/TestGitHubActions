@@ -4,17 +4,18 @@ on:
     branches:
       - main
 jobs:
-  name: Create Artifact
-  container: 
-    image: alpine:3.18.3
-  steps:
-    - name: Create File
-      run: |
-        touch sampleFile.txt
-        if: >-
-          !(github.event.pull_request)
-        uses: actions/upload-artifact@v3
-        with:
-          name: authfiles
-          path: ./sampleFile.txt
-    
+  create-arifact:
+    name: Create Artifact
+    container: 
+      image: alpine:3.18.3
+    steps:
+      - name: Create File
+        run: |
+          touch sampleFile.txt
+          if: >-
+            !(github.event.pull_request)
+          uses: actions/upload-artifact@v3
+          with:
+            name: authfiles
+            path: ./sampleFile.txt
+      
