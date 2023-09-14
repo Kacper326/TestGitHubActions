@@ -1,21 +1,22 @@
+# Action to create artifact
 name: create-artifact
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
+
 jobs:
   create-arifact:
     name: Create Artifact
-    container: 
-      image: alpine:3.18.3
+    runs-on: ubuntu-latest
     steps:
-      - name: Create File
-        run: |
-          touch sampleFile.txt
-          if: >-
-            !(github.event.pull_request)
-          uses: actions/upload-artifact@v3
-          with:
-            name: authfiles
-            path: ./sampleFile.txt
+      - name: Create file
+        run: touch sampleFile.txt
+        if: >-
+          !(github.event.pull_request)
+      - name: Share file
+        uses: actions/upload-artifact@v3
+        with:
+          name: authfiles
+          path: ./sampleFile.txt
+      - name: run download-artifact.yml
+        uses: ./.github/workflows/download-artifact.yml
       

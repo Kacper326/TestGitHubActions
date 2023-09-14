@@ -1,0 +1,10 @@
+name: download-artifact
+on: 
+  workflow_call:
+jobs:
+  echo-smth:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@3
+      - name: write smth
+        run: echo "It works"
