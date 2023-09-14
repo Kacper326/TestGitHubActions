@@ -5,6 +5,7 @@ jobs:
   echo-smth:
     runs-on: ubuntu-latest
     steps: 
-      - name: write smth
+      - name: check out
         uses: actions/checkout@v3
+      - name: write smth
         run: echo "It works"
