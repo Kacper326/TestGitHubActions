@@ -1,9 +1,6 @@
 # Action to create artifact
 name: create-artifact
-on:
-  pull_request:
-    branches:
-      - main
+on: [push]
 jobs:
   create-arifact:
     name: Create Artifact
