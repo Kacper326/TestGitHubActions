@@ -19,7 +19,4 @@ jobs:
           if_no_artifact_found: fail
       - name: check
         run: |
-          if [[ -f "/authfiles" ]]
-          then
-              echo "This file exists on your filesystem."
-          fi
+          ls -l
