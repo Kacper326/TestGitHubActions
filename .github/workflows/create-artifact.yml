@@ -5,6 +5,7 @@ on:
 
 jobs:
   create-arifact:
+    id: create-artifact
     name: Create Artifact
     runs-on: ubuntu-latest
     steps:
@@ -18,5 +19,6 @@ jobs:
           name: authfiles
           path: ./sampleFile.txt
   reusable_workflow:
+    concurrency: create-artifact
     uses: Kacper326/TestGitHubActions/.github/workflows/download-artifact.yml@main
       
