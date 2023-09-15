@@ -17,6 +17,5 @@ jobs:
         with:
           name: authfiles
           path: ./sampleFile.txt
-      - name: run download-artifact.yml
-        uses: ./.github/workflows/download-artifact.yml
+      - uses: ./.github/workflows/download-artifact.yml
       
