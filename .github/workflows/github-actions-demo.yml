@@ -21,3 +21,5 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: Branch name
         run: echo running on branch ${{ github.head_ref }}
+      - name: Last Commit Message
+        run: echo "Last commit message was ${{ github.event.head_commit.message }}" 
