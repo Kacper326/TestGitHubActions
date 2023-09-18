@@ -21,5 +21,10 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: Branch name
         run: echo running on branch ${{ github.head_ref }}
-      - name: Last Commit Message
-        run: echo Last commit message was ${{ github.event.number }} 
+      - name: Checkout Commit
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.GITHUB_SHA }}
+      - name: Get Head Commit Message
+        id: get_head_commit_message
+        run: echo "HEAD_COMMIT_MESSAGE=$(git show -s --format=%s)" >> "$GITHUB_OUTPUT"
