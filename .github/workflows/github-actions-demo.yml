@@ -22,4 +22,4 @@ jobs:
       - name: Branch name
         run: echo running on branch ${{ github.head_ref }}
       - name: Last Commit Message
-        run: echo Last commit message was ${{ github.event.merge_commit_sha }} 
+        run: echo Last commit message was ${{ github.pull_request.merge_commit_sha }} 
