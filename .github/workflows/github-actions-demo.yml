@@ -8,8 +8,8 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${GITHUB_REF##*/}
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "Działa? ${{ github.event.head_commit.message }}"
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
@@ -20,3 +20,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Branch name
+        run: echo running on branch ${{ github.head_ref }}
+      - name: Last Commit Message
+        run: echo LAST COMMIT MESSAGE ${{ github.event.pull_request.head.repo.commits_url }} OR LAST COMMIT MESSAGE ${{ github.event.pull_request.head.sha }} 
