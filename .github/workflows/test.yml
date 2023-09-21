@@ -5,11 +5,11 @@ on:
   pull_request:
     branch:
       - main
-outputs:
-  output1: ${{ steps.step1.outputs.test }}
 jobs:
   save-output:
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.step1.outputs.test }}
     steps: 
       - id: step1
         run: echo "test=hello" >> "$GITHUB_OUTPUT"
