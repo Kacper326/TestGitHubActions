@@ -22,8 +22,7 @@ jobs:
           commit: ${{github.event.pull_request.head.sha}}
           if_no_artifact_found: fail
       - name: check github event workflow_call
-        run: |
-        echo "${GITHUB_REF}"    
+        run: echo "${GITHUB_REF}"    
       - name: check
         run: |
           ls -l
