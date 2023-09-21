@@ -23,7 +23,7 @@ jobs:
           if_no_artifact_found: fail
       - name: check github event workflow_call
         if: ${{ github.event.workflow_call }}
-        run: echo ${{ github.event.workflow_call }}
+        run: echo "github.event.workflow ${{ github.event.workflow_call }}"
       - name: check
         run: |
           ls -l
