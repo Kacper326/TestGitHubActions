@@ -15,13 +15,15 @@ jobs:
       - name: Write smth
         run: echo ${{ github.run_id }}
       - name: Download-artifact
-        if: ${{ github.event.workflow_call }}
         id: download-artifact
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: create-artifact.yml
           commit: ${{github.event.pull_request.head.sha}}
           if_no_artifact_found: fail
+      - name: check github event workflow_call
+        if: ${{ github.event.workflow_call }}
+        name: echo ${{ github.event.workflow_call }}
       - name: check
         run: |
           ls -l
