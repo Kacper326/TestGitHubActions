@@ -9,7 +9,7 @@ jobs:
   save-output:
     runs-on: ubuntu-latest
     steps: 
-      - run: echo "test=hello" >> $GITHUB_OUTPUT"
+      - run: echo "test=hello" >> "$GITHUB_OUTPUT"
   pass-and-print-outpur:
     runs-on: ubuntu-latest
     needs: save-output
