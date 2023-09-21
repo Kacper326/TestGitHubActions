@@ -24,7 +24,7 @@ jobs:
       - name: check github event workflow_call
         run: |
         echo "github.event_name ${{ github.event_name }}"
-        echo "GITHUB_REF ${GITHUB_REF}"    
+        echo "${GITHUB_REF}"    
       - name: check
         run: |
           ls -l
