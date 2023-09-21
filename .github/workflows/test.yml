@@ -1,4 +1,4 @@
-name: run job if there is a change in specific folder
+name: test output
 run-name: ${{ github.actor }} is testing out bash script 🚀
 on: 
   workflow_dispatch:
