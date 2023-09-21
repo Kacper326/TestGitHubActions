@@ -22,7 +22,7 @@ jobs:
           commit: ${{github.event.pull_request.head.sha}}
           if_no_artifact_found: fail
       - name: check github event workflow_call
-        run: echo "github.event_name ${{ github.event_name }}"
+        run: echo "github.event_name ${{ github.event.workflow_run.event }}"
       - name: check
         run: |
           ls -l
