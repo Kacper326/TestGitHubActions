@@ -13,9 +13,10 @@ jobs:
     steps: 
       - id: step1
         run: echo "test=hello" >> "$GITHUB_OUTPUT"
-  pass-and-print-outpur:
+  pass-and-print-output:
     runs-on: ubuntu-latest
     needs: save-output
+    if: ${{needs.save-output.outputs.output1}}
     steps:
       - run: echo ${{needs.save-output.outputs.output1}}
   
