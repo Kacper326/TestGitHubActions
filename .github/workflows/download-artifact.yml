@@ -34,7 +34,7 @@ jobs:
         if: ${{ github.event_name != 'push' }} 
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: create-artifact.yml
+          run_id: '6275105303'
           if_no_artifact_found: fail
       - name: check
         run: |
