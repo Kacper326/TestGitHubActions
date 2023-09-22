@@ -6,13 +6,16 @@ on:
         - main
       paths:
         - .github/workflows/different-dir-different-action.yml
-        - force-app*/**
+        - force-app/base/*
+        - force-app/framework/*
 jobs:
   save-output:
     runs-on: ubuntu-latest
     steps: 
       - name: Create the Base Model Package
+        if: contains(github.event.pull_request.changed_files, 'force-app/base/*')
         run: echo "Create the base Model Package"  
       - name: Create the Framework Model Package
+      if: contains(github.event.pull_request.changed_files, 'force-app/framework/*')
         run: echo "Create the Framework Model Package"  
   
