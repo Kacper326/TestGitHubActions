@@ -16,6 +16,6 @@ jobs:
         if: contains(github.event.pull_request.changed_files, 'force-app/base/*')
         run: echo "Create the base Model Package"  
       - name: Create the Framework Model Package
-      if: contains(github.event.pull_request.changed_files, 'force-app/framework/*')
+        if: contains(github.event.pull_request.changed_files, 'force-app/framework/*')
         run: echo "Create the Framework Model Package"  
   
