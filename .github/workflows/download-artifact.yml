@@ -35,7 +35,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: create-artifact.yml
-          run_number: ${{ inputs.workflow-run-number }}
+          run_id: ${{ inputs.workflow-run-id }}
           if_no_artifact_found: fail
       - name: check
         run: |
