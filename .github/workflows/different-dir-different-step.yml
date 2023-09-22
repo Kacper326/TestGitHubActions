@@ -18,4 +18,15 @@ jobs:
       - name: Create the Framework Model Package
         if: contains(github.event.pull_request.changed_files, 'force-app/framework/*')
         run: echo "Create the Framework Model Package"  
+      - name: Checkout (fetch last two commits) of the PR
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+      - name: Process files changed in the current commit
+        run: |
+          changedFiles=$(git diff --name-only HEAD^)
+          for file in $changedFiles; do
+            echo "Processing file: $file"
+          done
   
