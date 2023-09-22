@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Create the Base Model Package
-        if: ${{ github.event.pull_request.head.repo.full_name == TestGitHubActions && contains(github.event.pull_request.changed_files, 'force-app/base/*') }}
+        if: ${{ github.event.pull_request.head.repo.full_name == 'Kacper326/TestGitHubActions' && contains(github.event.pull_request.changed_files, 'force-app/base/*') }}
         run: echo "Create the base Model Package"  
       - name: Create the Framework Model Package
         if: contains(github.event.pull_request.changed_files, 'force-app/framework/*')
