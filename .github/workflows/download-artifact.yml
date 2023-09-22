@@ -36,6 +36,7 @@ jobs:
         with:
           workflow: create-artifact.yml
           run_id: ${{ inputs.workflow-run-id }}
+          run_number: ${{ inputs.workflow-run-number }}
           if_no_artifact_found: fail
       - name: check
         run: |
