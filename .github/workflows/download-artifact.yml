@@ -4,7 +4,7 @@ on:
     inputs:
       workflow-run-id:
         type: number
-        required: true
+        required: false
         default: ''
         description: >-
           Workflow run ID to download the proper artifact.
