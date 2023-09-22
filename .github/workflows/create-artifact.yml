@@ -21,4 +21,6 @@ jobs:
   reusable_workflow:
     concurrency: group
     uses: Kacper326/TestGitHubActions/.github/workflows/download-artifact.yml@main
+      with: 
+        workflow-run-id: ${{ github.run_id }}
       

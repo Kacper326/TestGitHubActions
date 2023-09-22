@@ -1,6 +1,13 @@
 name: download-artifact
 on: 
   workflow_call:
+    inputs:
+      workflow-run-id:
+        type: string
+        required: true
+        default: ''
+        description: >-
+          Workflow run ID to download the proper artifact.
   push:
     branches:
       - main
@@ -18,9 +25,9 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: create-artifact.yml
-          run_id: ${{ github.event.workflow_run.id }}
+          run_id: ${{ inputs.workflow-run-id }}
           if_no_artifact_found: fail
       - name: check
         run: |
           ls -l
-          echo ${{ github.event.workflow_run }}
+          echo ${{ inputs.workflow-run-id }}
