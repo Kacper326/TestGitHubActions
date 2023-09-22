@@ -10,15 +10,9 @@ on:
 jobs:
   save-output:
     runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.step1.outputs.test }}
     steps: 
-      - id: step1
-        run: echo "test=" >> "$GITHUB_OUTPUT"
-  pass-and-print-output:
-    runs-on: ubuntu-latest
-    needs: save-output
-    if: ${{ needs.save-output.outputs.output1 }}
-    steps:
-      - run: echo ${{ needs.save-output.outputs.output1 }}
+      - name: Create the Base Model Package
+        run: echo "Create the base Model Package"  
+      - name: Create the Framework Model Package
+        run: echo "Create the Framework Model Package"  
   
