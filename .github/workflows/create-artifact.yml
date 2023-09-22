@@ -23,3 +23,4 @@ jobs:
     uses: Kacper326/TestGitHubActions/.github/workflows/download-artifact.yml@main
     with: 
       workflow-run-id: ${{ github.run_id }}
+      workflow-run-number: ${{ github.run_number }}
