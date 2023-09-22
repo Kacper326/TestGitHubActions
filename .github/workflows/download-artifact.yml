@@ -8,6 +8,12 @@ on:
         default: ''
         description: >-
           Workflow run number to download the proper artifact.
+      workflow-run-id:
+        type: string
+        required: false
+        default: ''
+        description: >-
+          Workflow run ID to download the proper artifact.s
   push:
     branches:
       - main
