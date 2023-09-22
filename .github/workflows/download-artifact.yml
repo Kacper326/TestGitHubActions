@@ -3,7 +3,7 @@ on:
   workflow_call:
     inputs:
       workflow-run-number:
-        type: number 
+        type: string
         required: true
         default: ''
         description: >-
