@@ -2,12 +2,6 @@ name: download-artifact
 on: 
   workflow_call:
     inputs:
-      workflow-run-id:
-        type: number
-        required: false
-        default: ''
-        description: >-
-          Workflow run ID to download the proper artifact.
       workflow-run-number:
         type: number 
         required: true
