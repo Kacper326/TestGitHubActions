@@ -13,9 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Echo variables
-        run:
-        echo "github.event.pull_request.head.repo.full_name = ${{ github.event.pull_request.head.repo.full_name }}"
-        echo "github.event.pull_request.changed_files = ${{ github.event.pull_request.changed_files }}"
+        run: echo "github.event.pull_request.head.repo.full_name = ${{ github.event.pull_request.head.repo.full_name }} && github.event.pull_request.changed_files = ${{ github.event.pull_request.changed_files }}"
       - name: Create the Base Model Package
         if: ${{ github.event.pull_request.head.repo.full_name == 'Kacper326/TestGitHubActions' && contains(github.event.pull_request.changed_files, 'force-app/base/*') }}
         run: echo "Create the base Model Package"  
