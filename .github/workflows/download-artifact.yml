@@ -40,7 +40,7 @@ jobs:
           ls -l
           echo "commit: ${{github.event.pull_request.head.sha}}"
       - name: Unzip the artifact
-        run: unzip authfiles.zip
+        run: unzip authfiles
       - name: check again filelist
         run: |
           ls -l
