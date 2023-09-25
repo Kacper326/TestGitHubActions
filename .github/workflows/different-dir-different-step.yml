@@ -36,8 +36,7 @@ jobs:
           
           echo "Changed files:"
           echo "$changedFiles"
-          echo ""
 
-          if [[ $changedFiles == *"force-app/base/"* ]]; then
+          if [[ $changedFiles == *"base"* ]]; then
             echo "There are changes in base"
           fi
