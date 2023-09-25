@@ -1,5 +1,5 @@
 # Action to create artifact
-name: create-artifact
+name: create-artifact v2
 on:
   workflow_dispatch:
 

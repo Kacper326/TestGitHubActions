@@ -1,4 +1,4 @@
-name: download-artifact
+name: download-artifact v2
 on: 
   workflow_call:
     inputs:
