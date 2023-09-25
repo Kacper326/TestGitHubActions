@@ -20,11 +20,10 @@ jobs:
       - name: Create the Framework Model Package
         if: contains(github.event.pull_request.changed_files, 'force-app/framework/*')
         run: echo "Create the Framework Model Package"  
-      - name: Checkout (fetch all commits) of the PR
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: ${{ github.event.pull_request.commits }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Fetch remote branches
+        run: git fetch origin ${{ github.head_ref }}:${{ github.head_ref }} && git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
       - name: Process files changed in the current commit
         run: |
             for file in $changedFiles; do
@@ -33,7 +32,7 @@ jobs:
             echo ${{ github.event.pull_request.commits }}
       - name: Check if there are changes in base
         run: 
-          changedFiles=$(git diff --name-only 'origin/${{ github.head_ref }}' 'origin/${{ github.base_ref }}')
+          changedFiles=$(git diff --name-only ${{ github.head_ref }} ${{ github.base_ref }})
           
           if [[ $changedFiles == *"base"* ]]; then
               echo "The variable \$changedFiles contains \"base\"."
