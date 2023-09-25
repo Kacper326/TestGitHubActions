@@ -1,4 +1,4 @@
-name: download-artifact
+name: download-artifact v2
 on: 
   workflow_call:
     inputs:
@@ -13,13 +13,7 @@ on:
         required: false
         default: ''
         description: >-
-          Workflow run ID to download the proper artifact.
-      commit-sha:
-        type: string
-        required: false
-        default: ''
-        description: >- 
-          Top commit SHA to download the proper artifact
+          Workflow run ID to download the proper artifact.s
   push:
     branches:
       - main
@@ -35,14 +29,8 @@ jobs:
         run: |
           echo "runner id: ${{ inputs.workflow-run-id }}"
           echo "runner number: ${{ inputs.workflow-run-number }}"
-          echo "commit SHA: ${{ inputs.commit-sha }}"
-      - name: Download-artifact
-        id: download-artifact
-        if: ${{ github.event_name != 'push' }} 
-        uses: dawidd6/action-download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
-          pr: ${{ inputs.commit-sha }}
-          name: authfiles
-      - name: check
-        run: |
-          ls -l
+          name: authfilesv2
+      - name: Display structure of downloaded files
+        run: ls -R
