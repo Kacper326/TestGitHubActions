@@ -41,7 +41,6 @@ jobs:
         if: ${{ github.event_name != 'push' }} 
         uses: dawidd6/action-download-artifact@v2
         with:
-          run_id: ${{ inputs.workflow-run-id }}
           commit: ${{ inputs.commit-sha }}
       - name: check
         run: |
