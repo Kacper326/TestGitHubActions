@@ -26,10 +26,29 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: ${{ github.event.pull_request.commits }}
       - name: Process files changed in the current commit
+        shell: bash
         run: |
           changedFiles=$(git diff --name-only HEAD^)
           for file in $changedFiles; do
             echo "Processing file: $file"
           done
           echo ${{ github.event.pull_request.commits }}
-  
+        
+        - name: check if there are changes in base
+          run: 
+            changedFiles=$(git diff --name-only HEAD^)
+            
+            if [[ $changedFiles == *"base"* ]]; then
+                echo "The variable \$changedFiles contains \"base\"."
+            else
+                echo "The variable \$changedFiles does not contain \"base\"."
+            fi
+        - name: check if there are changes in framework
+          run: 
+            changedFiles=$(git diff --name-only HEAD^)
+            
+            if [[ $changedFiles == *"framework"* ]]; then
+                echo "The variable \$changedFiles contains \"framework\"."
+            else
+                echo "The variable \$changedFiles does not contain \"framework\"."
+            fi
