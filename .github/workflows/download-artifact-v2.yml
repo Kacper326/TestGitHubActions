@@ -32,9 +32,5 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: authfilesv2
-      - name: Unzip artifact
-        run: unzip authfilesv2.zip
-      - name: Show what the artifact has
-        run: cat ./sampleFile.txt
       - name: Display structure of downloaded files
         run: ls -R
