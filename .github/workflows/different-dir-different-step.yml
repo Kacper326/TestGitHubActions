@@ -43,5 +43,5 @@ jobs:
             EOV \
           >> "$GITHUB_ENV"
       - name: Echo Base
-        if: env.CHANGED_FILES == *"force-app/base/"*
+        if: contains(env.CHANGED_FILES, 'force-app/base/') 
         run: echo "base is in env.CHANGED_FILES"
