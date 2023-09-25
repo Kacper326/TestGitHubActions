@@ -1,0 +1,26 @@
+# Action to create artifact
+name: create-artifact
+on:
+  workflow_dispatch:
+
+jobs:
+  create-arifact:
+    concurrency: group
+    name: Create Artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create file
+        run: touch sampleFile.txt
+        if: >-
+          !(github.event.pull_request)
+      - name: Share file
+        uses: actions/upload-artifact@v3
+        with:
+          name: authfiles
+          path: ./sampleFile.txt
+  reusable_workflow:
+    concurrency: group
+    uses: Kacper326/TestGitHubActions/.github/workflows/download-artifact.yml@main
+    with: 
+      workflow-run-number: ${{ github.run_number }}
+      workflow-run-id: ${{ github.run_id }}

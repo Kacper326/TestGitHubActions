@@ -1,0 +1,36 @@
+name: download-artifact
+on: 
+  workflow_call:
+    inputs:
+      workflow-run-number:
+        type: string
+        required: true
+        default: ''
+        description: >-
+          Workflow run number to download the proper artifact.
+      workflow-run-id:
+        type: string
+        required: false
+        default: ''
+        description: >-
+          Workflow run ID to download the proper artifact.s
+  push:
+    branches:
+      - main
+      - develop
+jobs:
+  download-artifact:
+    name: Download artifact 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: check inputs
+        run: |
+          echo "runner id: ${{ inputs.workflow-run-id }}"
+          echo "runner number: ${{ inputs.workflow-run-number }}"
+      - uses: actions/download-artifact@v3
+        with:
+          name: authfiles
+      - name: Display structure of downloaded files
+        run: ls -R
