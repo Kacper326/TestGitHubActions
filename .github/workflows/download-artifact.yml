@@ -34,9 +34,14 @@ jobs:
         if: ${{ github.event_name != 'push' }} 
         uses: dawidd6/action-download-artifact@v2
         with:
-          run_id: 6275289258
-          if_no_artifact_found: fail
+          commit: ${{github.event.pull_request.head.sha}}
       - name: check
         run: |
           ls -l
-          echo ${{ inputs.workflow-run-id }}
+          echo "commit: ${{github.event.pull_request.head.sha}}"
+      - name: Unzip the artifact
+        run: unzip authfiles.zip
+      - name: check again filelist
+        run: |
+          ls -l
+          cat sampleFile.txt

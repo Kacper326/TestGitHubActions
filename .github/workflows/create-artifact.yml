@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create file
-        run: touch sampleFile.txt
+        run: echo "1" > sampleFile.txt
         if: >-
           !(github.event.pull_request)
       - name: Share file
