@@ -34,8 +34,4 @@ jobs:
         run: 
           changedFiles=$(git diff --name-only ${{ github.head_ref }} ${{ github.base_ref }})
           
-          if [[ $changedFiles == *"base"* ]]; then
-              echo "The variable \$changedFiles contains \"base\"."
-          else
-              echo "The variable \$changedFiles does not contain \"base\"."
-          fi
+          echo "$changedFiles"
