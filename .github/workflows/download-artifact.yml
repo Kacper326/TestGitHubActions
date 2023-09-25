@@ -34,11 +34,11 @@ jobs:
         if: ${{ github.event_name != 'push' }} 
         uses: dawidd6/action-download-artifact@v2
         with:
-          commit: ${{github.event.pull_request.head.sha}}
+          commit: ${{ github.event.pull_request.head.sha }}
       - name: check
         run: |
           ls -l
-          echo "commit: ${{github.event.pull_request.head.sha}}"
+          echo "commit: ${{ github.event.pull_request.head.sha }}"
       - name: Unzip the artifact
         run: unzip authfiles
       - name: check again filelist
