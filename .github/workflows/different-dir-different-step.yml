@@ -36,13 +36,12 @@ jobs:
 
           echo "Changed files:"
           echo "$changed_files"
-
+          
           printf %s\\n \
             'CHANGED_FILES<<EOV' \
             "$changed_files" \
             EOV \
           >> "$GITHUB_ENV"
-
-        - name: Echo Base
-          if: env.CHANGED_FILES == *"force-app/base/"*
-          run: echo "base is in env.CHANGED_FILES"
+      - name: Echo Base
+        if: env.CHANGED_FILES == *"force-app/base/"*
+        run: echo "base is in env.CHANGED_FILES"
