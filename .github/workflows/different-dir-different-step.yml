@@ -31,12 +31,12 @@ jobs:
             done
             echo ${{ github.event.pull_request.commits }}
       - name: Check if there are changes in base
-        run: 
+        run: |
           changedFiles=$(git diff --name-only ${{ github.head_ref }} ${{ github.base_ref }})
-          
+
           echo "Changed files:"
           echo "$changedFiles"
 
-          if [[ $changedFiles == *"base"* ]]; then
+          if [[ $changedFiles == *"force-app/base/"* ]]; then
             echo "There are changes in base"
           fi
