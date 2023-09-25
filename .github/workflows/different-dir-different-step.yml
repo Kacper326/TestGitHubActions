@@ -24,26 +24,22 @@ jobs:
         uses: actions/checkout@v2
       - name: Fetch remote branches
         run: git fetch origin ${{ github.head_ref }}:${{ github.head_ref }} && git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
-      - name: Process files changed in the current commit
-        run: |
-            for file in $changedFiles; do
-              echo "Processing file: $file"
-            done
-            echo ${{ github.event.pull_request.commits }}
-      - name: Check if there are changes in base
+      - name: Save paths from changed files on pull request.
         run: |
           changed_files=$(git diff --name-only ${{ github.head_ref }} ${{ github.base_ref }})
 
           echo "Changed files:"
           echo "$changed_files"
-          
+
           printf %s\\n \
             'CHANGED_FILES<<EOV' \
             "$changed_files" \
             EOV \
           >> "$GITHUB_ENV"
       - name: Echo Base
-        if: contains(env.CHANGED_FILES, 'force-app/base/') 
+        if: >- 
+          contains(env.CHANGED_FILES, 'force-app/base/')
+          &&  ${{ success() }}
         run: echo "Base is in env.CHANGED_FILES"
       - name: Echo Framework
         if: contains(env.CHANGED_FILES, 'force-app/framework/') 
