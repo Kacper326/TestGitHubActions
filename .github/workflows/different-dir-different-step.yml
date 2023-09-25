@@ -33,22 +33,21 @@ jobs:
             echo "Processing file: $file"
           done
           echo ${{ github.event.pull_request.commits }}
-        
-        - name: Check if there are changes in base
-          run: 
-            changedFiles=$(git diff --name-only HEAD^)
-            
-            if [[ $changedFiles == *"base"* ]]; then
-                echo "The variable \$changedFiles contains \"base\"."
-            else
-                echo "The variable \$changedFiles does not contain \"base\"."
-            fi
-        - name: Check if there are changes in framework
-          run: 
-            changedFiles=$(git diff --name-only HEAD^)
-            
-            if [[ $changedFiles == *"framework"* ]]; then
-                echo "The variable \$changedFiles contains \"framework\"."
-            else
-                echo "The variable \$changedFiles does not contain \"framework\"."
-            fi
+      - name: Check if there are changes in base
+        run: 
+          changedFiles=$(git diff --name-only HEAD^)
+          
+          if [[ $changedFiles == *"base"* ]]; then
+              echo "The variable \$changedFiles contains \"base\"."
+          else
+              echo "The variable \$changedFiles does not contain \"base\"."
+          fi
+      - name: Check if there are changes in framework
+        run: 
+          changedFiles=$(git diff --name-only HEAD^)
+          
+          if [[ $changedFiles == *"framework"* ]]; then
+              echo "The variable \$changedFiles contains \"framework\"."
+          else
+              echo "The variable \$changedFiles does not contain \"framework\"."
+          fi
