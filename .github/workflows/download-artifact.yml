@@ -44,12 +44,12 @@ jobs:
           echo "workflow_run.id: ${{ github.event.workflow_run.id }}"
       - name: Download-artifact
         id: download-artifact
-        if: ${{ github.event_name != 'push' }}
+        if: github.event_name == 'workflow_run'
         uses: dawidd6/action-download-artifact@v2
         with:
           name: authfiles
-          # run_id: ${{ inputs.workflow-run-id }}
           run_id: ${{ github.event.workflow_run.id }}
+          skip_unpack: false
       - name: check
         run: |
           ls -l
