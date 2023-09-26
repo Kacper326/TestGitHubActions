@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create file
-        run: echo "test 1" > sampleFile.txt
+        run: echo "test 2" > sampleFile.txt
       - name: Share file
         uses: actions/upload-artifact@v3
         with:
