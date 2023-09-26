@@ -1,34 +1,39 @@
 name: download-artifact
-on: 
-  workflow_call:
-    inputs:
-      workflow-run-number:
-        type: string
-        required: true
-        default: ''
-        description: >-
-          Workflow run number to download the proper artifact.
-      workflow-run-id:
-        type: string
-        required: false
-        default: ''
-        description: >-
-          Workflow run ID to download the proper artifact.
-      commit-sha:
-        type: string
-        required: false
-        default: ''
-        description: >- 
-          Top commit SHA to download the proper artifact
+on:
+  # workflow_call:
+  #   inputs:
+  #     workflow-run-number:
+  #       type: string
+  #       required: true
+  #       default: ''
+  #       description: >-
+  #         Workflow run number to download the proper artifact.
+  #     workflow-run-id:
+  #       type: string
+  #       required: false
+  #       default: ''
+  #       description: >-
+  #         Workflow run ID to download the proper artifact.
+  #     commit-sha:
+  #       type: string
+  #       required: false
+  #       default: ''
+  #       description: >-
+  #         Top commit SHA to download the proper artifact
+  workflow_run:
+    workflows:
+      - create-artifact
+    types:
+      - completed
   push:
     branches:
       - main
       - develop
 jobs:
   download-artifact:
-    name: Download artifact 
+    name: Download artifact
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - name: checkout
         uses: actions/checkout@v3
       - name: check inputs
@@ -36,12 +41,15 @@ jobs:
           echo "runner id: ${{ inputs.workflow-run-id }}"
           echo "runner number: ${{ inputs.workflow-run-number }}"
           echo "commit SHA: ${{ inputs.commit-sha }}"
+          echo "workflow_run.id: ${{ github.event.workflow_run.id }}"
       - name: Download-artifact
         id: download-artifact
-        if: ${{ github.event_name != 'push' }} 
+        if: ${{ github.event_name != 'push' }}
         uses: dawidd6/action-download-artifact@v2
         with:
-          run_id: ${{ inputs.workflow-run-id }}
+          name: authfiles
+          # run_id: ${{ inputs.workflow-run-id }}
+          run_id: ${{ github.event.workflow_run.id }}
       - name: check
         run: |
           ls -l
