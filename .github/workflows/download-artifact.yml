@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check if I can get sha of workflow webhook
-        run: echo "${{ github.event.workflow_run.pull_requests.head.sha }}"
+        run: echo "github.event.workflow_run.pull_requests.head.sha:${{ github.event.workflow_run.pull_requests.base.sha }}"
       - name: Checkout on push event
         if: github.event_name == 'push'
         uses: actions/checkout@v3
@@ -43,7 +43,7 @@ jobs:
         if: github.event_name == 'workflow_run'
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.workflow_run.pull_requests.head.sha }}
+          ref: ${{ github.event.workflow_run.pull_requests.base.sha }}
       - name: check inputs
         run: |
           echo "runner id: ${{ inputs.workflow-run-id }}"
