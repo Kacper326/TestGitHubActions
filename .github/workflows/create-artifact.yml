@@ -2,7 +2,13 @@
 name: create-artifact
 on:
   workflow_dispatch:
-
+    inputs:
+      message:
+        type: string
+        required: true
+        default: ''
+        description: >-
+          Will be inserted into the artifact.
 jobs:
   create-arifact:
     concurrency: group
@@ -10,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create file
-        run: echo "1" > sampleFile.txt
+        run: echo ${{ inputs.message }} > sampleFile.txt
         if: >-
           !(github.event.pull_request)
       - name: Share file
