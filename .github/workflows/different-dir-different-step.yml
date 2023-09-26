@@ -20,35 +20,29 @@ jobs:
       - name: Create the Framework Model Package
         if: contains(github.event.pull_request.changed_files, 'force-app/framework/*')
         run: echo "Create the Framework Model Package"  
-      - name: Checkout (fetch last two commits) of the PR
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: ${{ github.event.pull_request.commits }}
-      - name: Process files changed in the current commit
-        shell: bash
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Fetch remote branches
+        run: git fetch origin ${{ github.head_ref }}:${{ github.head_ref }} && git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
+      - name: Save paths from changed files on pull request.
         run: |
-          changedFiles=$(git diff --name-only HEAD^)
-          for file in $changedFiles; do
-            echo "Processing file: $file"
-          done
-          echo ${{ github.event.pull_request.commits }}
-        
-        - name: check if there are changes in base
-          run: 
-            changedFiles=$(git diff --name-only HEAD^)
-            
-            if [[ $changedFiles == *"base"* ]]; then
-                echo "The variable \$changedFiles contains \"base\"."
-            else
-                echo "The variable \$changedFiles does not contain \"base\"."
-            fi
-        - name: check if there are changes in framework
-          run: 
-            changedFiles=$(git diff --name-only HEAD^)
-            
-            if [[ $changedFiles == *"framework"* ]]; then
-                echo "The variable \$changedFiles contains \"framework\"."
-            else
-                echo "The variable \$changedFiles does not contain \"framework\"."
-            fi
+          changed_files=$(git diff --name-only ${{ github.head_ref }} ${{ github.base_ref }})
+
+          echo "Changed files:"
+          echo "$changed_files"
+
+          printf %s\\n \
+            'CHANGED_FILES<<EOV' \
+            "$changed_files" \
+            EOV \
+          >> "$GITHUB_ENV"
+      - name: Echo Framework
+        if: contains(env.CHANGED_FILES, 'force-app/framework/') != true 
+        run: echo "Framework is in env.CHANGED_FILES "
+      - name: Echo Base
+        if: >- 
+          (contains(env.CHANGED_FILES, 'force-app/base/') == true 
+          &&  ${{ success() }})
+          || (contains(env.CHANGED_FILES, 'force-app/base/') == true 
+          &&  ${{ success() }})
+        run: echo "Base is in env.CHANGED_FILES"
