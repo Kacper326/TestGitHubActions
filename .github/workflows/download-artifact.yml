@@ -34,8 +34,16 @@ jobs:
     name: Download artifact
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Check if I can get sha of workflow webhook
+        run: echo "${{ github.event.workflow_run.pull_request.head.sha }}"
+      - name: Checkout on push event
+        if: github.event_name == 'push'
         uses: actions/checkout@v3
+      - name: Checkout on workflow run event
+        if: github.event_name == 'workflow_run'
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.workflow_run.pull_request.head.sha }}
       - name: check inputs
         run: |
           echo "runner id: ${{ inputs.workflow-run-id }}"
