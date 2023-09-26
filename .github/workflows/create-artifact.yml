@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Create file
         run: echo "test 0" > sampleFile.txt
-        if: >-
-          !(github.event.pull_request)
       - name: Share file
         uses: actions/upload-artifact@v3
         with:
