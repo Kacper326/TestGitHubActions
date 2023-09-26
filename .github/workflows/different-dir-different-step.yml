@@ -38,8 +38,7 @@ jobs:
           >> "$GITHUB_ENV"
       - name: Echo Framework
         if: >-
-          "!(contains(env.CHANGED_FILES, 'force-app/framework/') == false
-            && contains(env.CHANGED_FILES, 'force-app/base/'))" 
+          "!(contains(env.CHANGED_FILES, 'force-app/framework/') == false)" 
         run: echo "Framework is in env.CHANGED_FILES "
       - name: Echo Base
         if: >- 
