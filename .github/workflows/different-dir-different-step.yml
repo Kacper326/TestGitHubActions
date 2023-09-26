@@ -37,8 +37,10 @@ jobs:
             EOV \
           >> "$GITHUB_ENV"
       - name: Echo Framework
-        if: !(contains(env.CHANGED_FILES, 'force-app/framework/')) 
+        if: contains(env.CHANGED_FILES, 'force-app/framework/') == false 
         run: echo "Framework is in env.CHANGED_FILES"
       - name: Echo Base
-        if: !(contains(env.CHANGED_FILES, 'force-app/base/')) &&  ${{ success() }}
+        if: >- 
+          contains(env.CHANGED_FILES, 'force-app/base/') == true 
+          &&  ${{ success() }}
         run: echo "Base is in env.CHANGED_FILES"
