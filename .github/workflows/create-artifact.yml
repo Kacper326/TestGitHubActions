@@ -1,14 +1,9 @@
 # Action to create artifact
 name: create-artifact
 on:
-  workflow_dispatch:
-    inputs:
-      message:
-        type: string
-        required: true
-        default: ''
-        description: >-
-          Will be inserted into the artifact.
+  pull_request:
+    branches:
+      - main
 jobs:
   create-arifact:
     concurrency: group
