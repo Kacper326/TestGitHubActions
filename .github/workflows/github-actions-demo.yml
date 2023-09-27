@@ -3,7 +3,8 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: 
   pull_request:
     branch:
-      - main
+      - develop
+      # basically nigdy się nie odpali, ale niech zostanie na przyszłość
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
