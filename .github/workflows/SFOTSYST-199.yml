@@ -11,16 +11,12 @@ on:
 jobs:
     create-base-pkg:
       name: Try Creating the Packages
-      runs-on:
-        - self-hosted
-        - road-runner
-        - small
       container:
         # Using `full` variant of the image to have `jq` utility available:
         image: salesforce/cli:2.9.8-full
     steps: 
       - name: Checkout the Codebase
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
       - name: Verify if framework changed
         uses: tj-actions/verify-changed-files@v16
         id: verify-changed-files
