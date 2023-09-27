@@ -21,7 +21,7 @@ jobs:
         if: contains(github.event.pull_request.changed_files, 'force-app/framework/*')
         run: echo "Create the Framework Model Package"  
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Fetch remote branches
         run: git fetch origin ${{ github.head_ref }}:${{ github.head_ref }} && git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
       - name: Save paths from changed files on pull request.
