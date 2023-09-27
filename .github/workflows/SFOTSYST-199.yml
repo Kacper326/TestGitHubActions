@@ -15,7 +15,7 @@ jobs:
     steps: 
       - name: Checkout the Codebase
         uses: actions/checkout@v3
-        - name: Check if directory has changes
+      - name: Check if directory has changes
         id: directory_changes_checker
         uses: georgeneto/directory-changes-checker@v1
         with:
@@ -25,6 +25,7 @@ jobs:
       - name: Any other step
         if: steps.directory_changes_checker.output.hasChanges == 'true'
         run: echo "Działa :o"
+
     #   - name: Echo all changes
     #     run: echo "Changed files ${{ steps.verify-changed-files.outputs.changed_files }}"
     #   - name: Echo base if changes in base
