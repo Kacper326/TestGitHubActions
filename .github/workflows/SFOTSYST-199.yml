@@ -20,15 +20,19 @@ jobs:
         id: verify-changed-files
         with:
           files: |
-            *force-app/base/*
-            *force-app/framework/*
+            *base*
+            *framework*
     
       - name: Echo base if changes in base
         if: contains(steps.verify-changed-files.outputs.changed_files, '*force-app/base/*')
-        run: echo "Base"
-      - name: Echo base if changes in base
+        run: |
+          echo "Base"
+          echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
+      - name: Echo base if changes in framwork
         if: contains(steps.verify-changed-files.outputs.changed_files, '*force-app/framework/*')
-        run: echo "Framework"
+        run: |
+          echo "Framework"
+          echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
       #   - name: Verify if data model changed
       #     uses: tj-actions/verify-changed-files@v16
       #     id: data-model-change
