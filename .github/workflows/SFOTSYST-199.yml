@@ -17,20 +17,20 @@ jobs:
     steps: 
       - name: Checkout the Codebase
         uses: actions/checkout@v3
-      - name: Verify if framework changed
-        uses: tj-actions/verify-changed-files@v16
-        id: verify-changed-files
-        with:
-            files: |
-              *force-app/base/*
-              *force-app/framework/*
+    #   - name: Verify if framework changed
+    #     uses: tj-actions/verify-changed-files@v16
+    #     id: verify-changed-files
+    #     with:
+    #         files: |
+    #           *force-app/base/*
+    #           *force-app/framework/*
     
-      - name: Echo base if changes in base
-        if: contains(steps.verify-changed-files.outputs.changed_files, '*force-app/base/*')
-        run: echo "Base"
-      - name: Echo base if changes in base
-        if: contains(steps.verify-changed-files.outputs.changed_files, '*force-app/framework/*')
-        run: echo "Framework"
+    #   - name: Echo base if changes in base
+    #     if: contains(steps.verify-changed-files.outputs.changed_files, '*force-app/base/*')
+    #     run: echo "Base"
+    #   - name: Echo base if changes in base
+    #     if: contains(steps.verify-changed-files.outputs.changed_files, '*force-app/framework/*')
+    #     run: echo "Framework"
     #   - name: Verify if data model changed
     #     uses: tj-actions/verify-changed-files@v16
     #     id: data-model-change
