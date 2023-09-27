@@ -11,6 +11,10 @@ on:
 jobs:
   create-base-pkg:
     name: Try Creating the Packages
+    runs-on:
+        - self-hosted
+        - road-runner
+        - small
     container:
       # Using `full` variant of the image to have `jq` utility available:
       image: salesforce/cli:2.9.8-full
