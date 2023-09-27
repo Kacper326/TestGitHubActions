@@ -11,13 +11,7 @@ on:
 jobs:
   create-base-pkg:
     name: Try Creating the Packages
-    runs-on:
-        - self-hosted
-        - road-runner
-        - small
-    container:
-      # Using `full` variant of the image to have `jq` utility available:
-      image: salesforce/cli:2.9.8-full
+    runs-on: ubuntu-latest
     steps: 
       - name: Checkout the Codebase
         uses: actions/checkout@v3
