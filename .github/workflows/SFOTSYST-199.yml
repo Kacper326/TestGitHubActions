@@ -1,23 +1,19 @@
 name: md validation splitted with github ifs
 run-name: ${{ github.actor }} is testing out github if with tj-actions/verify-changed-files
 on:
-    pull_request:
-      branches:
-        - main
-      paths:
-        - .github/workflows/different-dir-different-action.yml
-        - force-app/base/*
-        - force-app/framework/*
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/different-dir-different-action.yml
+      - force-app/base/*
+      - force-app/framework/*
 jobs:
-    create-base-pkg:
-      name: Try Creating the Packages
-      runs-on:
-        - self-hosted
-        - road-runner
-        - small
-      container:
-        # Using `full` variant of the image to have `jq` utility available:
-        image: salesforce/cli:2.9.8-full
+  create-base-pkg:
+    name: Try Creating the Packages
+    container:
+      # Using `full` variant of the image to have `jq` utility available:
+      image: salesforce/cli:2.9.8-full
     steps: 
       - name: Checkout the Codebase
         uses: actions/checkout@v3
@@ -25,9 +21,9 @@ jobs:
         uses: tj-actions/verify-changed-files@v16
         id: verify-changed-files
         with:
-            files: |
-              *force-app/base/*
-              *force-app/framework/*
+          files: |
+            *force-app/base/*
+            *force-app/framework/*
     
       - name: Echo base if changes in base
         if: contains(steps.verify-changed-files.outputs.changed_files, '*force-app/base/*')
@@ -35,19 +31,20 @@ jobs:
       - name: Echo base if changes in base
         if: contains(steps.verify-changed-files.outputs.changed_files, '*force-app/framework/*')
         run: echo "Framework"
-    #   - name: Verify if data model changed
-    #     uses: tj-actions/verify-changed-files@v16
-    #     id: data-model-change
-    #     with:
-    #         files: |
-          
-    #   - name: Echo Framework
-    #     if: contains(env.CHANGED_FILES, 'force-app/framework/') != true 
-    #     run: echo "Framework is in env.CHANGED_FILES "
-    #   - name: Echo Base
-    #     if: >- 
-    #       (contains(env.CHANGED_FILES, 'force-app/base/') == true 
-    #       &&  ${{ success() }})
-    #       || (contains(env.CHANGED_FILES, 'force-app/base/') == true 
-    #       &&  ${{ success() }})
-    #     run: echo "Base is in env.CHANGED_FILES"
+      #   - name: Verify if data model changed
+      #     uses: tj-actions/verify-changed-files@v16
+      #     id: data-model-change
+      #     with:
+      #         files: |
+            
+      #   - name: Echo Framework
+      #     if: contains(env.CHANGED_FILES, 'force-app/framework/') != true 
+      #     run: echo "Framework is in env.CHANGED_FILES "
+      #   - name: Echo Base
+      #     if: >- 
+      #       (contains(env.CHANGED_FILES, 'force-app/base/') == true 
+      #       &&  ${{ success() }})
+      #       || (contains(env.CHANGED_FILES, 'force-app/base/') == true 
+      #       &&  ${{ success() }})
+      #     run: echo "Base is in env.CHANGED_FILES"
+  
