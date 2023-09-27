@@ -20,7 +20,7 @@ jobs:
         image: salesforce/cli:2.9.8-full
     steps: 
       - name: Checkout the Codebase
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Verify if framework changed
         uses: tj-actions/verify-changed-files@v16
         id: verify-changed-files
