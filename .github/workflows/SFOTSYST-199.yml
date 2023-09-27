@@ -20,7 +20,7 @@ jobs:
         id: verify-changed-files
         with:
           files: |
-            base
+            base/*
     
       - name: Echo base if changes in base
         if: contains(steps.verify-changed-files.outputs.changed_files, 'base')
