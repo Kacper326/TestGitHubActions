@@ -1,29 +1,23 @@
 name: Different dir different action
 run-name: ${{ github.actor }} is testing out bash script 🌃
 on:
-    pull_request:
-      branches:
-        - develop
-      paths:
-        - .github/workflows/different-dir-different-action.yml
-        - force-app/base/*
-        - force-app/framework/*
+  pull_request:
+    branches:
+      - main 
+    paths:
+      - .github/workflows/different-dir-different-action.yml
+      - force-app/base/*
+      - force-app/framework/*
 jobs:
   save-output:
     runs-on: ubuntu-latest
     steps: 
       - name: Echo variables
-        run: echo "github.event.pull_request.head.repo.full_name = ${{ github.event.pull_request.head.repo.full_name }} && github.event.pull_request.changed_files = ${{ github.event.pull_request.changed_files }}"
-      - name: Create the Base Model Package
-        if: ${{ github.event.pull_request.head.repo.full_name == 'Kacper326/TestGitHubActions' && contains(github.event.pull_request.changed_files, 'force-app/base/*') }}
-        run: echo "Create the base Model Package"  
-      - name: Create the Framework Model Package
-        if: contains(github.event.pull_request.changed_files, 'force-app/framework/*')
-        run: echo "Create the Framework Model Package"  
+        run: echo "github.head_ref = ${{ github.head_ref }} && github.base_ref = ${{ github.base_ref }}"
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Fetch remote branches
-        run: git fetch origin ${{ github.head_ref }}:${{ github.head_ref }} && git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
+        with: 
+          fetch-depth: 0
       - name: Save paths from changed files on pull request.
         run: |
           changed_files=$(git diff --name-only ${{ github.head_ref }} ${{ github.base_ref }})
@@ -36,13 +30,17 @@ jobs:
             "$changed_files" \
             EOV \
           >> "$GITHUB_ENV"
-      - name: Echo Framework
-        if: contains(env.CHANGED_FILES, 'force-app/framework/') != true 
-        run: echo "Framework is in env.CHANGED_FILES "
-      - name: Echo Base
-        if: >- 
-          (contains(env.CHANGED_FILES, 'force-app/base/') == true 
-          &&  ${{ success() }})
-          || (contains(env.CHANGED_FILES, 'force-app/base/') == true 
-          &&  ${{ success() }})
-        run: echo "Base is in env.CHANGED_FILES"
+      - name: Create the Data Model Package
+        id: create-data-model-pkg
+        if: >-
+          ((contains(env.CHANGED_FILES, 'force-app/base/')
+          || contains(env.CHANGED_FILES, 'force-app/framework/'))
+          && contains(env.CHANGED_FILES, 'force-app/data-model/') != true) != true
+        run: echo "Data model"
+      - name: Create the Framework Package
+        id: create-framework-pkg
+        if: >-
+          (contains(env.CHANGED_FILES, 'force-app/base/')
+          && contains(env.CHANGED_FILES, 'force-app/framework/') != true
+          && contains(env.CHANGED_FILES, 'force-app/data-model/') != true) != true    
+        run: echo "framework"
