@@ -20,16 +20,15 @@ jobs:
         id: verify-changed-files
         with:
           files: |
-            *base*
-            *framework*
+            base
     
       - name: Echo base if changes in base
-        if: contains(steps.verify-changed-files.outputs.changed_files, '*force-app/base/*')
+        if: contains(steps.verify-changed-files.outputs.changed_files, 'base')
         run: |
           echo "Base"
           echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
       - name: Echo base if changes in framwork
-        if: contains(steps.verify-changed-files.outputs.changed_files, '*force-app/framework/*')
+        if: contains(steps.verify-changed-files.outputs.changed_files, 'framework')
         run: |
           echo "Framework"
           echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
