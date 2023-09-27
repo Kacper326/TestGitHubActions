@@ -11,12 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create file
-        run: echo "test 0" > sampleFile.txt
+        run: echo "test 2" > sampleFile.txt
       - name: Share file
         uses: actions/upload-artifact@v3
         with:
           name: authfiles
           path: ./sampleFile.txt
+
 
   # reusable_workflow:
   #   concurrency: group
