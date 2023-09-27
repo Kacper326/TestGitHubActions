@@ -22,7 +22,7 @@ jobs:
           files: |
             base/test_bs
       - name: Echo all changes
-        run: echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
+        run: echo "Changed files ${{ steps.verify-changed-files.outputs.changed_files }}"
       - name: Echo base if changes in base
         if: contains(steps.verify-changed-files.outputs.changed_files, 'base')
         run: echo "Base"
