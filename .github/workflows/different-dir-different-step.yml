@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out bash script 🌃
 on:
     pull_request:
       branches:
-        - develop
+        - main 
       paths:
         - .github/workflows/different-dir-different-action.yml
         - force-app/base/*
