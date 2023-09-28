@@ -52,7 +52,7 @@ jobs:
           ) != true
         run: echo "Data model"
       - name: Create the Data Model Package v2
-        id: create-data-model-pkg
+        id: create-data-model-pkg-v2
         if: >-
           !(
             !(contains(env.CHANGED_FILES, 'force-app/data-model/'))
@@ -73,7 +73,7 @@ jobs:
           ) != true    
         run: echo "framework"
       - name: Create the Framework Package v2
-        id: create-framework-pkg
+        id: create-framework-pkg-v2
         if: >-
           !(
             contains(env.CHANGED_FILES, 'force-app/base/')
