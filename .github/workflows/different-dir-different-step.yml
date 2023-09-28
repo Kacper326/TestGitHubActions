@@ -5,9 +5,10 @@ on:
     branches:
       - main 
     paths:
-      - .github/workflows/different-dir-different-action.yml
+      - .github/workflows/different-dir-different-step.yml
       - force-app/base/*
       - force-app/framework/*
+      - force-app/data-model/*
 jobs:
   save-output:
     runs-on: ubuntu-latest
@@ -19,31 +20,82 @@ jobs:
       - name: Echo variables
         run: echo "github.event.pull_request.base.sha = ${{ github.event.pull_request.base.sha }} && github.event.pull_request.head.sha = ${{ github.event.pull_request.head.sha }}"
       - name: Save paths from changed files on pull request.
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          changed_files="$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})"
-
-          echo "Changed files:"
-          echo "$changed_files"
-
+          changed_files="$(
+            git diff --name-only \
+            $BASE_SHA \
+            $HEAD_SHA \
+          )"
           printf %s\\n \
             'CHANGED_FILES<<EOV' \
             "$changed_files" \
             EOV \
           >> "$GITHUB_ENV"
+          printf %s\\n \
+            'DEBUG: changed files BEGIN' \
+            "$changed_files" \
+            'DEBUG: changed files END' \
+            >&2
       - name: Create the Data Model Package
         id: create-data-model-pkg
         if: >-
-          ((contains(env.CHANGED_FILES, 'force-app/base/')
-          || contains(env.CHANGED_FILES, 'force-app/framework/'))
-          && contains(env.CHANGED_FILES, 'force-app/data-model/') != true) != true
+          (
+            contains(env.CHANGED_FILES, 'force-app/data-model/') != true
+            &&
+            (
+              contains(env.CHANGED_FILES, 'force-app/base/')
+              || contains(env.CHANGED_FILES, 'force-app/framework/')
+            )
+          ) != true
         run: echo "Data model"
+      - name: Create the Data Model Package v2
+        id: create-data-model-pkg-v2
+        if: >-
+          !(
+            !(contains(env.CHANGED_FILES, 'force-app/data-model/'))
+            &&
+            (
+              contains(env.CHANGED_FILES, 'force-app/base/')
+              || contains(env.CHANGED_FILES, 'force-app/framework/')
+            )
+          )
+          &&
+          !(
+            !(contains(env.CHANGED_FILES, 'force-app/data-model/'))
+            && !(contains(env.CHANGED_FILES, 'force-app/framework/'))
+            && !(contains(env.CHANGED_FILES, 'force-app/base/'))
+          )
+        run: echo "Data model v2"
       - name: Create the Framework Package
         id: create-framework-pkg
         if: >-
-          (contains(env.CHANGED_FILES, 'force-app/base/')
-          && contains(env.CHANGED_FILES, 'force-app/framework/') != true
-          && contains(env.CHANGED_FILES, 'force-app/data-model/') != true) != true    
+          (
+            contains(env.CHANGED_FILES, 'force-app/base/')
+            && contains(env.CHANGED_FILES, 'force-app/framework/') != true
+            && contains(env.CHANGED_FILES, 'force-app/data-model/') != true
+          ) != true    
         run: echo "framework"
+      - name: Create the Framework Package v2
+        id: create-framework-pkg-v2
+        if: >-
+          !(
+            contains(env.CHANGED_FILES, 'force-app/base/')
+            && !(contains(env.CHANGED_FILES, 'force-app/framework/'))
+            && !(contains(env.CHANGED_FILES, 'force-app/data-model/'))
+          )
+          &&
+          !(
+            !(contains(env.CHANGED_FILES, 'force-app/data-model/'))
+            && !(contains(env.CHANGED_FILES, 'force-app/framework/'))
+            && !(contains(env.CHANGED_FILES, 'force-app/base/'))
+          )
+        run: echo "framework v2"
       - name: Create base
+        if: >-
+          !(contains(env.CHANGED_FILES, 'force-app/framework'))
+          && !(contains(env.CHANGED_FILES, 'force-app/data-model'))
         id: create-base-pkg
         run: echo "Base"
