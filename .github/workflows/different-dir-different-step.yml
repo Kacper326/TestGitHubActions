@@ -61,15 +61,8 @@ jobs:
         id: create-framework-pkg-v2
         if: >-
           !(
-            contains(env.CHANGED_FILES, 'force-app/base/')
-            && !(contains(env.CHANGED_FILES, 'force-app/framework/'))
+            !(contains(env.CHANGED_FILES, 'force-app/framework/'))
             && !(contains(env.CHANGED_FILES, 'force-app/data-model/'))
-          )
-          &&
-          !(
-            !(contains(env.CHANGED_FILES, 'force-app/data-model/'))
-            && !(contains(env.CHANGED_FILES, 'force-app/framework/'))
-            && !(contains(env.CHANGED_FILES, 'force-app/base/'))
           )
         run: echo "framework v2"
       - name: Create base
