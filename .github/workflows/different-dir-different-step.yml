@@ -5,7 +5,7 @@ on:
     branches:
       - main 
     paths:
-      - .github/workflows/different-dir-different-action.yml
+      - .github/workflows/different-dir-different-step.yml
       - force-app/base/*
       - force-app/framework/*
       - force-app/data-model/*
