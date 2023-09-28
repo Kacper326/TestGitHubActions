@@ -8,6 +8,7 @@ on:
       - .github/workflows/different-dir-different-action.yml
       - force-app/base/*
       - force-app/framework/*
+      - force-app/data-model/*
 jobs:
   save-output:
     runs-on: ubuntu-latest
@@ -30,7 +31,7 @@ jobs:
             "$changed_files" \
             EOV \
           >> "$GITHUB_ENV"
-          
+
       - name: Create the Data Model Package
         id: create-data-model-pkg
         if: >-
