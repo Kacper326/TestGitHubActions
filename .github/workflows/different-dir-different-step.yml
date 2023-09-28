@@ -62,6 +62,12 @@ jobs:
               || contains(env.CHANGED_FILES, 'force-app/framework/')
             )
           )
+          &&
+          !(
+            !(contains(env.CHANGED_FILES, 'force-app/data-model/'))
+            && !(contains(env.CHANGED_FILES, 'force-app/framework/'))
+            && !(contains(env.CHANGED_FILES, 'force-app/base/'))
+          )
         run: echo "Data model v2"
       - name: Create the Framework Package
         id: create-framework-pkg
@@ -79,7 +85,13 @@ jobs:
             contains(env.CHANGED_FILES, 'force-app/base/')
             && !(contains(env.CHANGED_FILES, 'force-app/framework/'))
             && !(contains(env.CHANGED_FILES, 'force-app/data-model/'))
-          )   
+          )
+          &&
+          !(
+            !(contains(env.CHANGED_FILES, 'force-app/data-model/'))
+            && !(contains(env.CHANGED_FILES, 'force-app/framework/'))
+            && !(contains(env.CHANGED_FILES, 'force-app/base/'))
+          )
         run: echo "framework v2"
       - name: Create base
         if: >-
