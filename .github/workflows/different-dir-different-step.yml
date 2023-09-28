@@ -61,5 +61,6 @@ jobs:
           ) != true    
         run: echo "framework"
       - name: Create base
+        if: ! contains(env.CHANGED_FILES, 'force-app/framework')
         id: create-base-pkg
         run: echo "Base"
