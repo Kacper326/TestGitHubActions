@@ -44,3 +44,6 @@ jobs:
           && contains(env.CHANGED_FILES, 'force-app/framework/') != true
           && contains(env.CHANGED_FILES, 'force-app/data-model/') != true) != true    
         run: echo "framework"
+      - name: Create base
+        id: create-base-pkg
+        run: echo "Base"
