@@ -12,14 +12,14 @@ jobs:
   save-output:
     runs-on: ubuntu-latest
     steps: 
-      - name: Echo variables
-        run: |
-        echo "github.event.pull_request.base.sha = ${{ github.event.pull_request.base.sha }}"
-        echo "github.event.pull_request.head.sha = ${{ github.event.pull_request.head.sha }}"
       - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Echo variables
+        run: |
+        echo "github.event.pull_request.base.sha = ${{ github.event.pull_request.base.sha }}"
+        echo "github.event.pull_request.head.sha = ${{ github.event.pull_request.head.sha }}"
       - name: Save paths from changed files on pull request.
         run: |
           changed_files=$(git diff --name-only ${{ ithub.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
