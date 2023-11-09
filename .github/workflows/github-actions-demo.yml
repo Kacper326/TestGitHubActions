@@ -23,10 +23,10 @@ jobs:
           # for file in ./force-app/data-model/*.xml; do
           #   sed -i -e 's/<isActive>false</isActive>/<isActive>true</isActive>/g' "$file"
           # done
-          falseDuplicateRule="false"
-          trueDuplicateRule="true"
+          falseDuplicateRule="<isActive>false</isActive>"
+          trueDuplicateRule="<isActive>true</isActive>"
 
-          sed -i -e 's+false+true+g' ./D_M_Rules.xml
+          sed -i -e 's+<isActive>false</isActive>+<isActive>true</isActive>+g' ./D_M_Rules.xml
           cat D_M_Rules.xml
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
