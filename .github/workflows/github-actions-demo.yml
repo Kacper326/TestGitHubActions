@@ -23,8 +23,8 @@ jobs:
           # for file in ./force-app/data-model/*.xml; do
           #   sed -i -e 's/<isActive>false</isActive>/<isActive>true</isActive>/g' "$file"
           # done
-          falseDuplicateRule="<isActive>false</isActive>"
-          trueDuplicateRule="<isActive>true</isActive>"
+          falseDuplicateRule="false"
+          trueDuplicateRule="true"
 
           sed -i -e 's+$falseDuplicateRule+$trueDuplicateRule+g' ./D_M_Rules.xml
           cat D_M_Rules.xml
