@@ -26,12 +26,12 @@ runs:
           {
             "PatchVersion": 0,
             "BuildNumber": 2,
-            "Id": "05i090000010x9kAAA",
-            "SubscriberPackageVersionId": "04t090000012FsrAAE",
+            "Id": "93thui54k",
+            "SubscriberPackageVersionId": "randomID",
             "AncestorVersion": "N/A"
             "BuildDurationInSeconds": "",
             "HasMetadataRemoved": "N/A",
-            "CreatedBy": "0050900000C6C3lAAF"
+            "CreatedBy": "32y4ui34"
           }
           ],
           "warnings": []
@@ -41,6 +41,6 @@ runs:
 
         echo "$pkg_create_report"
 
-        jq -r '"sub-pkg-ver-id=\(.result.SubscriberPackageVersionId)"' <<< "$pkg_create_report" >> "$GITHUB_OUTPUT"
+        jq -r '"sub-pkg-ver-id=\(.result[0].SubscriberPackageVersionId)"' <<< "$pkg_create_report" >> "$GITHUB_OUTPUT"
 
         echo "after jq"
