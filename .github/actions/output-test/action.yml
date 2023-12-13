@@ -41,7 +41,6 @@ runs:
 
         echo "$pkg_create_report"
 
-        jq -r \
-          '"sub-pkg-ver-id=\(.result.SubscriberPackageVersionId)"' <<< "$pkg_create_report" >> "$GITHUB_OUTPUT"
+        jq -r '"sub-pkg-ver-id=\(.result.SubscriberPackageVersionId)"' <<< "$pkg_create_report" >> "$GITHUB_OUTPUT"
 
         echo "after jq"
