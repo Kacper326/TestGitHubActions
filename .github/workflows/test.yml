@@ -8,6 +8,15 @@ jobs:
     steps:
       - name: Checkout the Codebase
         uses: actions/checkout@v3
+      - name: 'Setup jq'
+        uses: dcarbone/install-jq-action@v2
+        with:
+          version: '1.7'
+          force: 'false'
+      - name: 'Check jq'
+        run: |
+          which jq
+          jq --version
       - name: Print Output
         id: print-output
         uses: ./.github/actions/output-test
