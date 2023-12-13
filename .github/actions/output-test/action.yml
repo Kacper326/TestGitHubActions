@@ -1,0 +1,45 @@
+name: Test Output
+outputs:
+  sub-pkg-ver-id:
+    description: >-
+      Subscriber package version ID of the newly created package version, if
+      created successfully.
+    value: ''
+runs: 
+  using: composite
+  steps:
+    - name: Step One
+      shell: sh
+      run: |
+
+        echo "Działa"
+
+        test_variable = "tak"
+        print = "$test_variable"
+
+        pkg_create_report = $(cat <<EOF
+        {
+        "status": 0,
+        "result": [
+          {
+            "PatchVersion": 0,
+            "BuildNumber": 2,
+            "Id": "05i090000010x9kAAA",
+            "SubscriberPackageVersionId": "04t090000012FsrAAE",
+            "AncestorVersion": "N/A"
+            "BuildDurationInSeconds": "",
+            "HasMetadataRemoved": "N/A",
+            "CreatedBy": "0050900000C6C3lAAF"
+          }
+          ],
+          "warnings": []
+        }
+        EOF
+        )
+
+        echo "$pkg_create_report""
+
+        jq -r \
+          '"sub-pkg-ver-id=\(.result.SubscriberPackageVersionId)"' \
+          <<< "$pkg_create_report" \
+          >> "$GITHUB_OUTPUT"
