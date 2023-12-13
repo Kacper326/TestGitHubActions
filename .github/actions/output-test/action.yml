@@ -45,3 +45,5 @@ runs:
           '"sub-pkg-ver-id=\(.result.SubscriberPackageVersionId)"' \
           <<< "$pkg_create_report" \
           >> "$GITHUB_OUTPUT"
+
+        echo "after jq"
