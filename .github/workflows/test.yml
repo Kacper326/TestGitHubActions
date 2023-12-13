@@ -8,11 +8,6 @@ jobs:
     steps:
       - name: Checkout the Codebase
         uses: actions/checkout@v3
-      - name: 'Setup jq'
-        uses: dcarbone/install-jq-action@v2
-        with:
-          version: '1.7'
-          force: 'false'
       - name: 'Check jq'
         run: |
           which jq
