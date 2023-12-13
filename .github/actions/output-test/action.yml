@@ -14,8 +14,8 @@ runs:
 
         echo "Działa"
 
-        test_variable = "tak"
-        print = "$test_variable"
+        test_variable="tak"
+        echo "$test_variable"
 
         pkg_create_report = $(cat <<EOF
         {
