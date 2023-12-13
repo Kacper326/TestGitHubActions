@@ -17,7 +17,7 @@ runs:
         test_variable="tak"
         echo "$test_variable"
 
-        pkg_create_report=$(cat <<EOF
+        pkg_create_report="$(cat <<EOF
         {
         "status": 0,
         "result": [
@@ -35,11 +35,6 @@ runs:
           "warnings": []
         }
         EOF
-        )
+        )"
 
-        echo "$pkg_create_report""
-
-        jq -r \
-          '"sub-pkg-ver-id=\(.result.SubscriberPackageVersionId)"' \
-          <<< "$pkg_create_report" \
-          >> "$GITHUB_OUTPUT"
+        echo "$pkg_create_report"
