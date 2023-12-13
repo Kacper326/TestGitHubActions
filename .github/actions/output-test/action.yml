@@ -17,7 +17,7 @@ runs:
         test_variable="tak"
         echo "$test_variable"
 
-        pkg_create_report = $(cat <<EOF
+        pkg_create_report=$(cat <<EOF
         {
         "status": 0,
         "result": [
