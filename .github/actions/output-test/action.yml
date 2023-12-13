@@ -4,11 +4,13 @@ outputs:
     description: >-
       Subscriber package version ID of the newly created package version, if
       created successfully.
-    value: ''
+    value: >-
+      ${{ steps.step-one.outputs.sub-pkg-ver-id }}
 runs: 
   using: composite
   steps:
     - name: Step One
+      id: step-one
       shell: sh
       run: |
 
