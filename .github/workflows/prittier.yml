@@ -19,5 +19,5 @@ jobs:
         shell: bash
         run: |
           echo "The following files are not formatted:"
-          echo "${{steps.prettier-run.outputs.prettier_output}}"
+          echo "${{ steps.prettier-run.outputs.prettier_output }}"
 

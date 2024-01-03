@@ -10,6 +10,7 @@ overrides:
       semi: false
       parser: babel
       useTabs: false
+      bracketSpacing: false
   - files: "**/*.json"
     options:
       tabWidth: 2
