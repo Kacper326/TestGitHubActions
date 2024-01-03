@@ -1,5 +1,11 @@
-singleQuote: true
-endOfLine: lf
-semi: false
-useTabs: false
-bracketSpacing: false
+overrides:
+  - files:
+      - .github/actions/*/action.yaml
+      - .github/actions/*/action.yml
+      - .github/workflows/*.yaml
+      - .github/workflows/*.yml
+    options:
+      singleQuote: true
+  - files: "**/*.json"
+    options:
+      tabWidth: 2

@@ -1,4 +1,0 @@
-const exampleObject = {
-    key: "value"
-  };
-  
