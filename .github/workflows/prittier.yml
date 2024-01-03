@@ -13,7 +13,7 @@ jobs:
         id: prettier-run
         uses: rutajdash/prettier-cli-action@v1.0.0
         with:
-          config_path: ./.prettierrc.yml
+          config_path: .prettierrc.yml
       - name: Cat prettierrc.yml
         run: cat .prettierrc.yml 
       - name: Prettier Output
@@ -22,4 +22,3 @@ jobs:
         run: |
           echo "The following files are not formatted:"
           echo "${{ steps.prettier-run.outputs.prettier_output }}"
-
