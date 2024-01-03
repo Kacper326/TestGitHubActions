@@ -6,6 +6,10 @@ overrides:
       - .github/workflows/*.yml
     options:
       singleQuote: true
+      endOfLine: lf
+      semi: false
+      parser: babel
+      useTabs: false
   - files: "**/*.json"
     options:
       tabWidth: 2
