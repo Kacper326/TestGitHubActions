@@ -2,7 +2,6 @@
 name: create-artifact v2
 on:
   workflow_dispatch:
-
 jobs:
   create-arifact:
     concurrency: group

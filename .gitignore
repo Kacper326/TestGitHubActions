@@ -1,3 +1,4 @@
 # SFDX CLI local data files:
 /.sf/
 /.sfdx/
+node_modules

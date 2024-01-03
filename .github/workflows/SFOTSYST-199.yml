@@ -21,34 +21,7 @@ jobs:
         with:
           repo-token: ${{secrets.GITHUB_TOKEN}}
           directory: "{base/}"
-
       - name: Any other step
         if: steps.directory_changes_checker.output.hasChanges == 'true'
         run: echo "Działa :o"
 
-    #   - name: Echo all changes
-    #     run: echo "Changed files ${{ steps.verify-changed-files.outputs.changed_files }}"
-    #   - name: Echo base if changes in base
-    #     if: contains(steps.verify-changed-files.outputs.changed_files, 'base')
-    #     run: echo "Base"
-    #   - name: Echo base if changes in framwork
-    #     if: contains(steps.verify-changed-files.outputs.changed_files, 'framework')
-    #     run: echo "Framework"
-          
-      #   - name: Verify if data model changed
-      #     uses: tj-actions/verify-changed-files@v16
-      #     id: data-model-change
-      #     with:
-      #         files: |
-            
-      #   - name: Echo Framework
-      #     if: contains(env.CHANGED_FILES, 'force-app/framework/') != true 
-      #     run: echo "Framework is in env.CHANGED_FILES "
-      #   - name: Echo Base
-      #     if: >- 
-      #       (contains(env.CHANGED_FILES, 'force-app/base/') == true 
-      #       &&  ${{ success() }})
-      #       || (contains(env.CHANGED_FILES, 'force-app/base/') == true 
-      #       &&  ${{ success() }})
-      #     run: echo "Base is in env.CHANGED_FILES"
-  

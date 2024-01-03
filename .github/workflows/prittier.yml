@@ -9,17 +9,33 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      - name: Setup yq
+        uses: dcarbone/install-yq-action@v1.1.1
+        with:
+          version: 'v4.35.1'
+          download-compressed: 'true'
+          force: 'false'
+      - name: Check yq
+        run: |
+          which yq
+          yq --version
+      - name: Setup file_pattern from .prettierrc.yml
+        id: file-pattern
+        run: |
+          echo "files=$(yq eval-all '.overrides[].files[]' .prettierrc.yml | sed "s|^|'|" | sed "s|$|'|" | tr '\n' ' ')" >> $GITHUB_OUTPUT
       - name: Run Prettier
         id: prettier-run
-        uses: rutajdash/prettier-cli-action@v1.0.0
+        uses: ./.github/actions/prettier-cli-action
         with:
-          config_path: ./.prettierrc.yml
+          config_path: .prettierrc.yml
       - name: Cat prettierrc.yml
-        run: cat .prettierrc.yml 
+        run: cat .prettierrc.yml
       - name: Prettier Output
         if: ${{ failure() }}
         shell: bash
         run: |
           echo "The following files are not formatted:"
           echo "${{ steps.prettier-run.outputs.prettier_output }}"
-
+          echo "Follow bellow steps to prettify your code:"
+          echo "Install prettier locally: https://prettier.io/docs/en/install.html"
+          echo "Then format all filles with this command: prettier FILE_NAME --write"
