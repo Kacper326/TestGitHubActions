@@ -1,7 +1,7 @@
 name: Ensure prettiness of the code base
 on:
   pull_request:
-    branches: develop
+    branches: main
 jobs:
   prettier:
     name: Prettier Check
