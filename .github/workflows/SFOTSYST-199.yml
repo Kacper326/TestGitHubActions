@@ -24,3 +24,4 @@ jobs:
       - name: Any other step
         if: steps.directory_changes_checker.output.hasChanges == 'true'
         run: echo "Działa :o"
+
