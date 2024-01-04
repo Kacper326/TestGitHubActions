@@ -32,7 +32,7 @@ runs:
     - name: Running Prettier
       id: prettier-run
       shell: bash
-      run: echo "prettier-output=$(prettier . --check)" >> $GITHUB_OUTPUT
+      run: echo "prettier-output=$(prettier . --check --no-error-on-unmatched-pattern)" >> $GITHUB_OUTPUT
     - name: Fail On Error
       id: fail-on-error
       if: steps.prettier-run.outputs.prettier-output != 0 && steps.prettier-run.outputs.prettier-output != '' && inputs.fail_on_error
