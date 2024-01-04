@@ -1,10 +1,10 @@
 semi: false
 overrides:
   - files:
-      - ".github/actions/*/action.yaml"
+      - ".github/workflows/*.yml"
       - ".github/actions/*/action.yml"
       - ".github/workflows/*.yaml"
-      - ".github/workflows/*.yml"
+      - ".github/actions/*/action.yaml"
     options:
       singleQuote: true
   - files: 
