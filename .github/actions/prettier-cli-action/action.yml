@@ -33,7 +33,7 @@ runs:
       id: prettier-run
       shell: bash
       run: |
-        prettier-output="$(prettier . --check | tr '\n' ' ')"
+        prettier-output="$(prettier . --config .prettierrc.yml --list-different)"
         if [ -n "$prettier-output" ]; then
           echo "Follow bellow steps to prettify your code:"
           echo "Install prettier locally: https://prettier.io/docs/en/install.html"
