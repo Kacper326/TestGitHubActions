@@ -5,10 +5,6 @@ inputs:
     description: 'The path to the prettierrc file'
     required: false
     default: ''
-  ignore_path:
-    description: 'The path to the prettierignore file'
-    required: false
-    default: './.prettierignore'
   prettier_version:
     description: 'The version of prettier to install'
     required: false
@@ -28,20 +24,16 @@ runs:
       id: prettier-install
       shell: bash
       run: npm install --global prettier@${{ inputs.prettier_version }}
-
     - name: Running Prettier
       id: prettier-run
       shell: bash
-      run: |
-        prettier-output=$(prettier . --config .prettierrc.yml --list-different)
-        if [ -n "$prettier-output" ]; then
-          echo "Follow bellow steps to prettify your code:"
-          echo "Install prettier locally: https://prettier.io/docs/en/install.html"
-          echo "Then format all filles with this command: prettier FILE_NAME --write"
-          exit 1
-        fi
+      run: echo "prettier-output=$(prettier . --config ${{ inputs.config_path }} --list-different --no-error-on-unmatched-pattern)" >> $GITHUB_OUTPUT
     - name: Fail On Error
       id: fail-on-error
       if: steps.prettier-run.outputs.prettier-output != 0 && steps.prettier-run.outputs.prettier-output != '' && inputs.fail_on_error
       shell: bash
-      run: exit 1
+      run: |
+        echo "Follow bellow steps to prettify your code:"
+        echo "Install prettier locally: https://prettier.io/docs/en/install.html"
+        echo "Then format all filles with this command: prettier FILE_NAME --write"
+        exit 1
