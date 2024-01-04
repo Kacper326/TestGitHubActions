@@ -19,10 +19,6 @@ jobs:
         run: |
           which yq
           yq --version
-      - name: Setup file_pattern from .prettierrc.yml
-        id: file-pattern
-        run: |
-          echo "files=$(yq eval-all '.overrides[].files[]' .prettierrc.yml | sed "s|^|'|" | sed "s|$|'|" | tr '\n' ' ')" >> $GITHUB_OUTPUT
       - name: Run Prettier
         id: prettier-run
         uses: ./.github/actions/prettier-cli-action
