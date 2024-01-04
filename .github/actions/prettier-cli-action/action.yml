@@ -17,6 +17,8 @@ outputs:
   prettier_output:
     description: 'The output from prettier'
     value: ${{ steps.prettier-run.outputs.prettier-output }}
+env:
+  PRETTIER_OUTPUT: ""
 runs:
   using: 'composite'
   steps:
@@ -27,10 +29,10 @@ runs:
     - name: Running Prettier
       id: prettier-run
       shell: bash
-      run: echo "prettier-output=$(prettier . --config ${{ inputs.config_path }} --list-different --no-error-on-unmatched-pattern)" >> $GITHUB_OUTPUT
+      run: echo "PRETTIER_OUTPUT=$(prettier . --config ${{ inputs.config_path }} --list-different --no-error-on-unmatched-pattern)" >> $GITHUB_ENV
     - name: Fail On Error
       id: fail-on-error
-      if: steps.prettier-run.outputs.prettier-output != 0 && steps.prettier-run.outputs.prettier-output != '' && inputs.fail_on_error
+      if: env.PRETTIER_OUTPUT != '' && inputs.fail_on_error
       shell: bash
       run: |
         echo "Follow bellow steps to prettify your code:"
