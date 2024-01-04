@@ -33,11 +33,12 @@ runs:
       id: prettier-run
       shell: bash
       run: |
-        echo "prettier-output=$(prettier . --check)"
+        prettier-output=$(prettier . --check)
         if [ -n "$prettier-output" ]; then
           echo "Follow bellow steps to prettify your code:"
           echo "Install prettier locally: https://prettier.io/docs/en/install.html"
           echo "Then format all filles with this command: prettier FILE_NAME --write"
+          exit 1
         fi
     - name: Fail On Error
       id: fail-on-error
