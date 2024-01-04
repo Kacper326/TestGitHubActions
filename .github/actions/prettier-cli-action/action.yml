@@ -34,7 +34,7 @@ runs:
       shell: bash
       run: |
         echo "prettier-output=$(prettier . --check)"
-        if [ -n "$prettier-output"]; then
+        if [ -n "$prettier-output" ]; then
           echo "Follow bellow steps to prettify your code:"
           echo "Install prettier locally: https://prettier.io/docs/en/install.html"
           echo "Then format all filles with this command: prettier FILE_NAME --write"
