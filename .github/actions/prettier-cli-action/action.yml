@@ -28,7 +28,18 @@ runs:
       id: prettier-run
       shell: bash
       run: |
-        echo "PRETTIER_OUTPUT=$(prettier --list-different --config .prettierrc.yml --ignore-unknown --no-error-on-unmatched-pattern ${{ inputs.file_pattern }})" >> $GITHUB_ENV
+        echo "prettier_output=$(prettier --list-different --config .prettierrc.yml --ignore-unknown --no-error-on-unmatched-pattern ${{ inputs.file_pattern }})"\
+        || echo "Problem running prettier with $prettier_output"; exit 1;
+        
+        if [ -z "$prettier_output" ]
+        then
+          echo "There is a nothing to prettify! Great!"
+        else
+          echo "Follow bellow steps to prettify your code:"
+          echo "Install prettier locally: https://prettier.io/docs/en/install.html"
+          echo "Then format all filles with this command: prettier FILE_NAME --write"
+          exit 1
+        fi
     - name: Fail On Error
       id: fail-on-error
       if:  env.PRETTIER_OUTPUT != '' && inputs.fail_on_error
