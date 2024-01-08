@@ -17,7 +17,7 @@ jobs:
         uses: creyD/prettier_action@v4.3
         with:
           # This part is also where you can pass other options, for example:
-          prettier_options: --write **/*.{json,yml,yaml} --no-error-on-unmatched-pattern
+          prettier_options: --check **/*.{json,yml,yaml} --no-error-on-unmatched-pattern
           only_changed: True
       - name: List out Unprettefied Files as warning
         shell: sh
