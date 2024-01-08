@@ -9,16 +9,23 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Run Prettier
-        id: prettier-run
-        uses: rutajdash/prettier-cli-action@v1.0.0
         with:
-          config_path: .prettierrc.yml
-      - name: Cat prettierrc.yml
-        run: cat .prettierrc.yml 
-      - name: Prettier Output
-        if: ${{ failure() }}
-        shell: bash
-        run: |
-          echo "The following files are not formatted:"
-          echo "${{ steps.prettier-run.outputs.prettier_output }}"
+          fetch-depth: 0
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v41
+      - name: Prettier Check
+        uses: ./.github/actions/prettier-cli-action
+        with:
+          files_to_check: ${{ steps.changed-files.outputs.all_changed_files }}
+
+      # - name: Prettify code
+      #   uses: creyD/prettier_action@v4.3
+      #   with:
+      #     prettier_options: --list-different --config .prettierrc.yml --ignore-unknown --no-error-on-unmatched-pattern ${{ steps.changed-files.outputs.all_changed_files }}
+      # - name: List out Unprettefied Files as warning
+      #   shell: sh
+      #   run: |
+      #     git diff --name-only \
+      #       | awk '{print "::warning files =" $0 "::File needs prerrifing." }'
+      #     echo "gitówa"

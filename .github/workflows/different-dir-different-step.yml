@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out bash script 🌃
 on:
   pull_request:
     branches:
-      - main 
+      - main
     paths:
       - .github/workflows/different-dir-different-step.yml
       - force-app/base/*
@@ -12,7 +12,7 @@ on:
 jobs:
   save-output:
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
@@ -68,4 +68,3 @@ jobs:
       - name: Create base
         id: create-base-pkg
         run: echo "Base"
-    
