@@ -18,7 +18,7 @@ jobs:
         uses: creyD/prettier_action@v4.3
         with:
           dry: true
-          prettier_options: --check --config .prettierrc.yml --no-error-on-unmatched-pattern ${{ steps.changed-files.outputs.all_changed_files }}
+          prettier_options: --check --config .prettierrc.yml --ignore-unknown --no-error-on-unmatched-pattern ${{ steps.changed-files.outputs.all_changed_files }}
       - name: List out Unprettefied Files as warning
         shell: sh
         run: |
