@@ -30,7 +30,7 @@ runs:
       run: |
         mapfile -t my_array < <(git diff --name-only)
         for element in "${my_array[@]}"; do
-          echo "prettier-output=$(prettier ${element} --config ${{ inputs.config_path }} --list-different --no-error-on-unmatched-pattern)"
+          echo "prettier-output=$(prettier $element --config ${{ inputs.config_path }} --list-different --no-error-on-unmatched-pattern)"
         done
     - name: Fail On Error
       id: fail-on-error
