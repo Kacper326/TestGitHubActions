@@ -14,12 +14,18 @@ jobs:
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v41
-      - name: Prettify code
-        uses: creyD/prettier_action@v4.3
+      - name: Prettier Check
+        uses: ./.github/actions/prettier-cli-action
         with:
-          prettier_options: --list-different --config .prettierrc.yml --ignore-unknown --no-error-on-unmatched-pattern ${{ steps.changed-files.outputs.all_changed_files }}
-      - name: List out Unprettefied Files as warning
-        shell: sh
-        run: |
-          git diff --name-only \
-            | awk '{print "::warning files =" $0 "::File needs prerrifing." }'
+          file_pattern: ${{ steps.changed-files.outputs.all_changed_files }}
+
+      # - name: Prettify code
+      #   uses: creyD/prettier_action@v4.3
+      #   with:
+      #     prettier_options: --list-different --config .prettierrc.yml --ignore-unknown --no-error-on-unmatched-pattern ${{ steps.changed-files.outputs.all_changed_files }}
+      # - name: List out Unprettefied Files as warning
+      #   shell: sh
+      #   run: |
+      #     git diff --name-only \
+      #       | awk '{print "::warning files =" $0 "::File needs prerrifing." }'
+      #     echo "gitówa"
