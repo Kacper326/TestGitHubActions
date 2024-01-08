@@ -1,10 +1,6 @@
 name: Prettier Check
 description: 'A simple action which runs the Prettier CLI Check'
 inputs:
-  config_path:
-    description: 'The path to the prettierrc file'
-    required: false
-    default: ''
   prettier_version:
     description: 'The version of prettier to install'
     required: false
@@ -13,6 +9,10 @@ inputs:
     description: 'Whether the script should fail when linting errors are found'
     required: false
     default: true
+  file_pattern:
+    description: 'The file pattern to scan'
+    required: false
+    default: '**/*'
 outputs:
   prettier_output:
     description: 'The output from prettier'
@@ -28,13 +28,14 @@ runs:
       id: prettier-run
       shell: bash
       run: |
-        mapfile -t my_array < <(git diff --name-only)
-        for element in "${my_array[@]}"; do
-          echo "prettier-output=$(prettier $element --config ${{ inputs.config_path }} --list-different --no-error-on-unmatched-pattern)"
-        done
+        echo "prettier-output=$(prettier --list-different \
+        --config .prettierrc.yml \
+        --ignore-unknown \
+        --no-error-on-unmatched-pattern \ 
+        ${{ inputs.file_pattern }})" >> "$GITHUB_OUTPUT"
     - name: Fail On Error
       id: fail-on-error
-      if: env.PRETTIER_OUTPUT != '' && inputs.fail_on_error
+      if:  steps.prettier-run.outputs.prettier-output != '' && inputs.fail_on_error
       shell: bash
       run: |
         echo "Follow bellow steps to prettify your code:"
