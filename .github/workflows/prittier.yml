@@ -15,7 +15,7 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v41
       - name: Prettier Check
-        uses: .github\actions\prettier-cli-action
+        uses: ./.github/actions/prettier-cli-action
         with:
           file_pattern: ${{ steps.changed-files.outputs.all_changed_files }}
 
