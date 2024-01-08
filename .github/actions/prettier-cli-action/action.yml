@@ -31,13 +31,12 @@ runs:
         echo prettier_output<<EOF
         prettier --list-different --config .prettierrc.yml --ignore-unknown --no-error-on-unmatched-pattern ${{ inputs.file_pattern }}
         EOF
-        echo "PRETTIER_OUTPUT=$prettier_output" >> "$GITHUB_OUTPUT"
+        echo "PRETTIER_OUTPUT=$(prettier_output)" >> "$GITHUB_OUTPUT"
     - name: Fail On Error
       id: fail-on-error
       if:  steps.prettier-run.outputs.PRETTIER_OUTPUT != '' && inputs.fail_on_error
       shell: bash
       run: |
-        echo ""
         echo "Follow bellow steps to prettify your code:"
         echo "Install prettier locally: https://prettier.io/docs/en/install.html"
         echo "Then format all filles with this command: prettier FILE_NAME --write"
