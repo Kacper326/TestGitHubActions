@@ -30,7 +30,7 @@ runs:
       run: |
         {
           echo 'prettier-output<<EOF'
-          prettier --list-different --config .prettierrc.yml --ignore-unknown --no-error-on-unmatched-pattern ${{ inputs.file_pattern }})
+          prettier --list-different --config .prettierrc.yml --ignore-unknown --no-error-on-unmatched-pattern ${{ inputs.file_pattern }}
           echo EOF
         } >> "$GITHUB_OUTPUT"
     - name: Fail On Error
