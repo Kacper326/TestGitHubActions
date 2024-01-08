@@ -23,3 +23,4 @@ jobs:
         run: |
           git diff --name-only \
             | awk '{print "::warning files =" $0 "::File needs prerrifing." }'
+          echo "gitówa"
