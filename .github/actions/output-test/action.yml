@@ -6,7 +6,7 @@ outputs:
       created successfully.
     value: >-
       ${{ steps.step-one.outputs.sub-pkg-ver-id }}
-runs: 
+runs:
   using: composite
   steps:
     - name: Step One

@@ -1,6 +1,6 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: 
+on:
   push:
     branch:
       - main
@@ -37,5 +37,4 @@ jobs:
       - name: Branch name
         run: echo running on branch ${{ github.head_ref }}
       - name: Last Commit Message
-        run: echo LAST COMMIT MESSAGE ${{ github.event.pull_request.head.repo.commits_url }} OR LAST COMMIT MESSAGE ${{ github.event.pull_request.head.sha }} 
-
+        run: echo LAST COMMIT MESSAGE ${{ github.event.pull_request.head.repo.commits_url }} OR LAST COMMIT MESSAGE ${{ github.event.pull_request.head.sha }}

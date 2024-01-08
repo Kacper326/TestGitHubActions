@@ -20,8 +20,7 @@ on:
   #       default: ''
   #       description: >-
   #         Top commit SHA to download the proper artifact
-  
-  
+
   workflow_run:
     workflows:
       - create-artifact
@@ -64,4 +63,3 @@ jobs:
         run: |
           ls -l
           cat sampleFile.txt
-
