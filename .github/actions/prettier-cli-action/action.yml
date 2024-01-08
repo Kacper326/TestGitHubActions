@@ -17,8 +17,6 @@ outputs:
   prettier_output:
     description: 'The output from prettier'
     value: ${{ steps.prettier-run.outputs.prettier-output }}
-env:
-  PRETTIER_OUTPUT: ""
 runs:
   using: 'composite'
   steps:
@@ -29,7 +27,11 @@ runs:
     - name: Running Prettier
       id: prettier-run
       shell: bash
-      run: echo "PRETTIER_OUTPUT=$(prettier . --config ${{ inputs.config_path }} --list-different --no-error-on-unmatched-pattern)" >> $GITHUB_ENV
+      run: |
+        mapfile -t my_array < <(git diff --name-only)
+        for element in "${my_array[@]}"; do
+          echo "prettier-output=$(prettier $element --config ${{ inputs.config_path }} --list-different --no-error-on-unmatched-pattern)"
+        done
     - name: Fail On Error
       id: fail-on-error
       if: env.PRETTIER_OUTPUT != '' && inputs.fail_on_error
