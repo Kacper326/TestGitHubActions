@@ -9,8 +9,17 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Run Prettier
-        id: prettier-run
-        uses: ./.github/actions/prettier-cli-action
+        fetch-depth: 0
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v41
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.3
         with:
-          config_path: .prettierrc.yml
+          dry: true
+          prettier_options: --check --no-error-on-unmatched-pattern ${{ steps.changed-files.outputs.all_changed_files }}
+      - name: List out Unprettefied Files as warning
+        shell: sh
+        run: |
+          git diff --name-only \
+            | awk '{print "::warning files =" $0 "::File needs prerrifing." }'
