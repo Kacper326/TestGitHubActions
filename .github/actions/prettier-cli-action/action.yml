@@ -28,10 +28,7 @@ runs:
       id: prettier-run
       shell: bash
       run: |
-        echo prettier_output<<EOF
-        prettier --list-different --config .prettierrc.yml --ignore-unknown --no-error-on-unmatched-pattern ${{ inputs.file_pattern }}
-        EOF
-        echo PRETTIER_OUTPUT=${prettier_output} >> "$GITHUB_OUTPUT"
+        echo "::set-output name=prettier-output::$(prettier --list-different --config .prettierrc.yml --ignore-unknown --no-error-on-unmatched-pattern ${{ inputs.file_pattern }})" >> $GITHUB_OUTPUT
     - name: Fail On Error
       id: fail-on-error
       if:  steps.prettier-run.outputs.PRETTIER_OUTPUT != '' && inputs.fail_on_error
