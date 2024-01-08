@@ -1,7 +1,6 @@
 name: test output
 run-name: ${{ github.actor }} is testing out bash script 🚀
-on: 
-  [push, pull_request]
+on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest

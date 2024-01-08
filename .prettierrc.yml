@@ -7,7 +7,7 @@ overrides:
       - ".github/actions/*/action.yaml"
     options:
       singleQuote: true
-  - files: 
-    - '**/*.json'
+  - files:
+      - "**/*.json"
     options:
       tabWidth: 2
