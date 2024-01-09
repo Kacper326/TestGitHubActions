@@ -24,7 +24,7 @@ runs:
       id: prettier-run
       shell: bash
       run: |
-        FILES_TO_CHECK= "${{ inputs.files-to-check }}"
+        FILES_TO_CHECK="${{ inputs.files-to-check }}"
         prettier_output="$(
         prettier --list-different \
         --config .prettierrc.yml \
