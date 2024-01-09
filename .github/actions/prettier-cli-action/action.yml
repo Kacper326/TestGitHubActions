@@ -1,7 +1,7 @@
 name: Prettier Check
 description: 'A action which runs the Prettier CLI Check'
 inputs:
-  prettier_version:
+  prettier-version:
     description: 'The version of prettier to install'
     required: false
     default: '3.1.1'
@@ -9,26 +9,29 @@ inputs:
     description: 'Whether the script should fail when linting errors are found'
     required: false
     default: true
-  files_to_check:
+  files-to-check:
     description: 'Files to check'
     required: false
     default: '**/*'
+env:
+  FILES_TO_CHECK: ${{ inputs.files-to-check }}
 runs:
   using: composite
   steps:
-    - name: Installing Prettier
+    - name: Install Prettier through NPM
       id: prettier-install
       shell: bash
-      run: npm install --global prettier@${{ inputs.prettier_version }}
-    - name: Running Prettier
+      run: npm install --global prettier@${{ inputs.prettier-version }}
+    - name: Run Prettier
       id: prettier-run
       shell: bash
       run: |
-        prettier_output=$(prettier --list-different \
+        prettier_output="$(
+        prettier --list-different \
         --config .prettierrc.yml \
         --ignore-unknown \
         --no-error-on-unmatched-pattern \
-        ${{ inputs.files_to_check }}) \
+        $FILES_TO_CHECK)" \
         || ( 
         printf %s\\n \
         "Files to Prettify: " \
