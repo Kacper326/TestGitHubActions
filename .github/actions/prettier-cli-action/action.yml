@@ -13,6 +13,8 @@ inputs:
     description: 'Files to check'
     required: false
     default: '**/*'
+env: 
+  FILES_TO_CHECK: {{ inputs.files-to-check }}
 runs:
   using: composite
   steps:
@@ -24,7 +26,6 @@ runs:
       id: prettier-run
       shell: bash
       run: |
-        FILES_TO_CHECK="${{ inputs.files-to-check }}"
         prettier_output="$(
         prettier --list-different \
         --config .prettierrc.yml \
