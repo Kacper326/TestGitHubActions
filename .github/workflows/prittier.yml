@@ -17,4 +17,4 @@ jobs:
       - name: Prettier Check
         uses: ./.github/actions/prettier-cli-action
         with:
-          files_to_check: ${{ steps.changed-files.outputs.all_changed_files }}
+          files-to-check: ${{ steps.changed-files.outputs.all_changed_files }}
