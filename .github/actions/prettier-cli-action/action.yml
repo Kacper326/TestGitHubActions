@@ -33,12 +33,10 @@ runs:
         --no-error-on-unmatched-pattern \
         $FILES_TO_CHECK)" \
         || ( 
-        printf %s\\n \
-        "::error Files to Prettify:
-        $prettier_output::" \
-        " " \
-        "::notice Follow bellow steps to prettify your code:
-        - Install prettier locally: https://prettier.io/docs/en/install.html
-        - Then format all filles with this command: prettier FILE_NAME --write::"
+        echo "::error:: Files to Prettify:%0A \
+        $prettier_output"
+        echo "::notice:: Follow bellow steps to prettify your code:%0A
+        - Install prettier locally: https://prettier.io/docs/en/install.html%0A
+        - Then format all filles with this command: prettier FILE_NAME --write"
         exit 1
         )
