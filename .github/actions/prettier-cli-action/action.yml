@@ -36,8 +36,8 @@ runs:
         for file_to_prettify in $prettier_output; do
           echo "::error:: File to Prettify: $file_to_prettify"
         done        
-        echo "::notice:: Follow bellow steps to prettify your code: \
-        - Install prettier locally: https://prettier.io/docs/en/install.html \
-        - Then format all filles with this command: prettier FILE_NAME --write"
+        echo '::notice:: Follow bellow steps to prettify your code:%0A' \
+        '- Install prettier locally: https://prettier.io/docs/en/install.html%0A' \
+        '- Then format all filles with this command: prettier FILE_NAME --write0A'
         exit 1
         )
