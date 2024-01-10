@@ -13,8 +13,6 @@ inputs:
     description: 'Files to check'
     required: false
     default: '**/*'
-env: 
-  FILES_TO_CHECK: {{ inputs.files-to-check }}
 runs:
   using: composite
   steps:
@@ -24,6 +22,8 @@ runs:
       run: npm install --global prettier@${{ inputs.prettier-version }}
     - name: Run Prettier
       id: prettier-run
+      env: 
+        FILES_TO_CHECK: ${{ inputs.files-to-check }}
       shell: bash
       run: |
         prettier_output="$(
@@ -34,7 +34,7 @@ runs:
         $FILES_TO_CHECK)" \
         || ( 
         printf %s\\n \
-        "Files to Prettify: " \
+        "::error:: Files to Prettify: " \
         "$prettier_output" \
         " "\
         "Follow bellow steps to prettify your code:" \
