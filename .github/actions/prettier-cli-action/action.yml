@@ -34,12 +34,9 @@ runs:
         $FILES_TO_CHECK)" \
         || ( 
         IFS=$'\n'   # Set the Internal Field Separator to newline
-        for line in $prettier_output; do
-          echo "$line"
-        done
-        echo "::error:: Files to Prettify: $prettier_output"
-        echo "::notice:: Follow bellow steps to prettify your code:%0A
-        - Install prettier locally: https://prettier.io/docs/en/install.html%0A
-        - Then format all filles with this command: prettier FILE_NAME --write"
+        for file_to_prettify in $prettier_output; do
+          echo ""::error:: Files to Prettify: $file_to_prettify"
+        done        
+        echo "::notice:: Follow bellow steps to prettify your code:%0A- Install prettier locally: https://prettier.io/docs/en/install.html%0A- Then format all filles with this command: prettier FILE_NAME --write"
         exit 1
         )
