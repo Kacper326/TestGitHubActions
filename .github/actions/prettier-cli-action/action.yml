@@ -33,7 +33,6 @@ runs:
         --no-error-on-unmatched-pattern \
         $FILES_TO_CHECK)" \
         || ( 
-        IFS=$'\n'   # Set the Internal Field Separator to newline
         for file_to_prettify in $prettier_output; do
           echo "::error:: File to Prettify: $file_to_prettify"
         done        
