@@ -34,11 +34,11 @@ runs:
         $FILES_TO_CHECK)" \
         || ( 
         printf %s\\n \
-        "::error:: Files to Prettify: " \
-        "$prettier_output" \
-        " "\
-        "Follow bellow steps to prettify your code:" \
-        "- Install prettier locally: https://prettier.io/docs/en/install.html" \
-        "- Then format all filles with this command: prettier FILE_NAME --write"
+        "::error Files to Prettify:
+        $prettier_output::" \
+        " " \
+        "::notice Follow bellow steps to prettify your code:
+        - Install prettier locally: https://prettier.io/docs/en/install.html
+        - Then format all filles with this command: prettier FILE_NAME --write::"
         exit 1
         )
