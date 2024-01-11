@@ -26,6 +26,7 @@ runs:
         FILES_TO_CHECK: ${{ inputs.files-to-check }}
       shell: bash
       run: |
+        find -name prettier
         prettier_output="$(
         prettier --list-different \
         --config .prettierrc.yml \
