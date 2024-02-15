@@ -39,6 +39,8 @@ jobs:
             chore: add ${{ inputs.new-pkg-version }} package version information
       - run: git branch --show-current
       - run: echo ${{ github.ref_name }}
+      - name: Create an empty file
+        run: touch example.txt
       - name: Supplementary Submit a Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
