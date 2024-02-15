@@ -48,4 +48,5 @@ jobs:
           branch: feature/${{ inputs.new-pkg-version }}-supplement-develop
           title: >-
             chore: add ${{ inputs.new-pkg-version }} package version information
-  
+          commit-message: >-
+            chore: add ${{ inputs.new-pkg-version }} package version information
