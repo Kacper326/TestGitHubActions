@@ -40,7 +40,7 @@ jobs:
       - run: git branch --show-current
       - run: echo ${{ github.ref_name }}
       - name: Create an empty file
-        run: touch example.txt
+        run: touch example2.txt
       - name: Supplementary Submit a Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
