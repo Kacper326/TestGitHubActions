@@ -1,0 +1,40 @@
+name: Create PRs
+on:
+  workflow_dispatch:
+    inputs:
+      new-pkg-version:
+        type: string
+        required: true
+        description: >-
+          Three-section version number (e.g. 2.0.1) to be assigned to the newly
+          created package versions.
+jobs:
+  create-2-PRs:
+    name: Create 2 Pull Requests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Create an empty file
+        run: touch example.txt
+      - name: Submit a Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          base: main
+          branch: feature/${{ inputs.new-pkg-version }}
+          title: >-
+            chore: add ${{ inputs.new-pkg-version }} package version information
+          commit-message: >-
+            chore: add ${{ inputs.new-pkg-version }} package version information
+      - name: Supplementary Submit a Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          base: main
+          branch: feature/${{ inputs.new-pkg-version }}-supplement-develop
+          title: >-
+            chore: add ${{ inputs.new-pkg-version }} package version information
+          commit-message: >-
+            chore: add ${{ inputs.new-pkg-version }} package version information
+  
