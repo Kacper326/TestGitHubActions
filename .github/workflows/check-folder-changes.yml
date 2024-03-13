@@ -15,7 +15,7 @@ jobs:
         
       - name: Check for changes
         run: |
-          if [[ $(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '*/objects/*/fields/') ]]; then
+          if [[ $(git diff --name-only ${{ github.event.before }} ${{ github.event.pull_request.head.sha }} | grep '*/objects/*/fields/') ]]; then
             echo "nice"
           else
             echo "No changes in '*/objects/*/fields/' folder."
