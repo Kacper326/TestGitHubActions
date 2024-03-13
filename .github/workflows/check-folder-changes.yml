@@ -1,0 +1,22 @@
+name: Check Folder Changes
+
+on:
+  pull_request:
+    paths:
+      - '*/objects/*/fields/*'
+
+jobs:
+  check_changes:
+    name: Check Folder Changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        
+      - name: Check for changes
+        run: |
+          if [[ $(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '*/objects/*/fields/') ]]; then
+            echo "nice"
+          else
+            echo "No changes in '*/objects/*/fields/' folder."
+          fi
