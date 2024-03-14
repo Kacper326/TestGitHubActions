@@ -15,6 +15,7 @@ jobs:
         
       - name: List new files
         run: |
+          git diff --name-status origin/main...HEAD
           new_files=$(git diff --name-status origin/main...HEAD | grep -E '^A' | grep '*/objects/*/fields/')
           if [ -n "$new_files" ]; then
             echo "nice"
