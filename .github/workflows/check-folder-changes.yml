@@ -18,8 +18,8 @@ jobs:
           echo "${{ github.event.pull_request.head.sha }}"
           echo "${{ github.event.pull_request.base.sha }}"
           git rev-list --max-parents=0 HEAD
-          git diff --name-status origin/main 
-          new_files=$(git diff --name-status origin/main...HEAD | grep -E '^A' | grep '*/objects/*/fields/')
+          git diff ${{ github.event.pull_request.base.sha }}  ${{ github.event.pull_request.head.sha }}
+          new_files=$(git diff ${{ github.event.pull_request.base.sha }}  ${{ github.event.pull_request.head.sha }} | grep -E '^A' | grep '*/objects/*/fields/')
           if [ -n "$new_files" ]; then
             echo "nice"
           else
